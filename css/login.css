@@ -1,0 +1,45 @@
+.s1{
+  padding: 50px;
+}
+.button{
+    background-color: rgba(88, 88, 88, 0.733);
+    border: none;
+    color: rgb(253, 253, 253);
+    padding: 15px 32px;
+    text-align: center;
+    font-style:oblique;
+    display: inline-block;
+    font-size: 10px;
+    transition-duration: 0.8s;
+   margin: 10px 10px 10px;
+  }
+  .button:hover {
+    background-color: rgb(0, 0, 0);
+    color: rgb(253, 253, 253);
+    
+  }
+  
+  .buttonsub{
+    background-color: rgba(255, 255, 255, 0.733);
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 20px 32px;
+    padding-top:15px;
+    text-align: center;
+    font-style:oblique;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+    transition-duration: 0.8s;
+   margin: 10px 10px 10px;
+  }
+  .buttonsub:hover {
+    background-color: lightgrey;
+    color: white;
+  }
+
+.sides{
+  background-color: rgb(173, 173, 173);
+  width: 50%;
+  height: 30%;
+}
