@@ -63,6 +63,9 @@ h1{
   padding-top: 5%;
   color:black;
 }
+
+
+
 /*--------icons----------------*/
 .input-icons i {
   position: absolute;
@@ -80,6 +83,12 @@ h1{
 
 .input-field {
   width: 80%;
+  padding: 10px;
+  text-align: center;
+}
+
+.input-field2 {
+  width: 40%;
   padding: 10px;
   text-align: center;
 }
