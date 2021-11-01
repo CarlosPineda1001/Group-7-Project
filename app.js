@@ -1,5 +1,6 @@
 const express = require('express');
-
+const mongoose = require('mongoose');
+const Doc = require('./Models/document_Schema');
 
 
 //express app
@@ -7,7 +8,17 @@ const express = require('express');
 const app = express();
 //const PORT = process.env.PORT || 3000;
 
+// connect to mongodb
+const dbURI = 'mongodb+srv://Carlos:XpaZ@mongouploads.zxnhp.mongodb.net/Document_Database?retryWrites=true&w=majority';
+mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
+    .then((result) => {
+        app.listen(3000, () =>{
+            console.log('Server started');
+        }); 
+    })
+    .catch((err) => console.log(err));
 
+    
 
 
 const demo ={em: "marcelusandrei@gmail.com", 
@@ -18,9 +29,6 @@ let demo2 = [];
 const name = 'Macky';
 app.set('view engine', 'ejs');
 
-
-//listen for reqs
-app.listen(3000);
 
 //mmiddle ware for static files
 
@@ -45,14 +53,33 @@ app.get('/Login_Page', (req, res) =>{
    res.render('Loginpage');
 });
 
-app.get('/ViewPage_Default', (req, res) =>{
-   
-    res.render('ViewPageDefault');
+// blog routes
+app.get('/ViewPage_Default', (req,res)=>{
+    Doc.find().sort({ createdAt: -1})
+        .then((result) =>{
+            res.render('ViewPageDefault', {docs: result});
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
 });
 
 app.get('/NewDocs', (req, res) =>{
    
     res.render('NewDocsPage');
+    
+});
+
+app.post('/ViewPage_Default', (req,res)=>{
+    const doc = new Doc(req.body);
+
+    doc.save()
+    .then(result => {
+      res.redirect('/ViewPage_Default');
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 

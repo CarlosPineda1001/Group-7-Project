@@ -37,7 +37,25 @@
 </div>
 
 <div class = "Files">
-    
+
+  <div class = 'Doc content' >
+    <h2>All Docs</h2>
+    <div>
+
+      
+      <% if(docs.length > 0) { %>
+          <% docs.forEach(doc => { %>
+              <a href = "/ViewPageDefault/<%= doc._id%>">
+                  <h3 class ="file_Name" style = 'background-color: rgb(205,197,197); display: block;'><%= doc.file_Name %></h3>
+              </a>
+          <% }) %>
+      <% } else { %>
+          <p>There are no documents to display... </p>
+      
+      <% } %>
+    </div>
+</div>
+
 
 
 </div>
