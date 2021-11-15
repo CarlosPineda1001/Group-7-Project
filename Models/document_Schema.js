@@ -6,11 +6,11 @@ const Schema = mongoose.Schema;
 const documentSchema =  new Schema({
     file_Name:{
         type: String,
-        required: true
+        // required: true
     },
     docu_Group:{
         type: String,
-        required: true
+        // required: true
     },
     // docu_Type:{
     //     type: String,

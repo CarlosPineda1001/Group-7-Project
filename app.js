@@ -1,12 +1,35 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const crypto = require('crypto');
+const multer = require('multer');
 const mongoose = require('mongoose');
+const {GridFsStorage} = require('multer-gridfs-storage');
+const Grid = require('gridfs-stream');
+const methodOverride = require('method-override');
+
 const Doc = require('./Models/document_Schema');
 
 
 //express app
 //instance of express app
 const app = express();
-//const PORT = process.env.PORT || 3000;
+
+const demo ={em: "marcelusandrei@gmail.com", 
+                 pass: "gangplank"};
+
+let demo2 = [];
+//register view engine
+const name = 'Macky';
+app.set('view engine', 'ejs');
+
+//middleware
+
+app.use(express.static('css'));
+app.use(express.urlencoded({extended: true})); //used for accepting form data
+app.use(bodyParser.json());
+app.use(methodOverride('_method'));
+
 
 // connect to mongodb
 const dbURI = 'mongodb+srv://Carlos:XpaZ@mongouploads.zxnhp.mongodb.net/Document_Database?retryWrites=true&w=majority';
@@ -18,23 +41,38 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
     })
     .catch((err) => console.log(err));
 
-    
+let datab = mongoose.connection;
+
+// Init gfs
+let gfs;
+
+datab.once('open', () => {
+    gfs = Grid(datab.db, mongoose.mongo);
+    gfs.collection('docs');
+})
 
 
-const demo ={em: "marcelusandrei@gmail.com", 
-                 pass: "gangplank"};
 
-let demo2 = [];
-//register view engine
-const name = 'Macky';
-app.set('view engine', 'ejs');
-
-
-//mmiddle ware for static files
-
-app.use(express.static('css'));
-app.use(express.urlencoded()); //used for accepting form data
-
+// create storage engine
+const storage = new GridFsStorage({
+    url: dbURI,
+    file: (req, file) => {
+      return new Promise((resolve, reject) => {
+        crypto.randomBytes(16, (err, buf) => {
+          if (err) {
+            return reject(err);
+          }
+          const filename = buf.toString('hex') + path.extname(file.originalname);
+          const fileInfo = {
+            filename: filename,
+            bucketName: 'docs'
+          };
+          resolve(fileInfo);
+        });
+      });
+    }
+  });
+  const upload = multer({ storage })
 
 
 //lsten to what page
@@ -53,7 +91,7 @@ app.get('/Login_Page', (req, res) =>{
    res.render('Loginpage');
 });
 
-// blog routes
+// doc routes
 app.get('/ViewPage_Default', (req,res)=>{
     Doc.find().sort({ createdAt: -1})
         .then((result) =>{
@@ -70,7 +108,7 @@ app.get('/NewDocs', (req, res) =>{
     
 });
 
-app.post('/ViewPage_Default', (req,res)=>{
+app.post('/ViewPage_Default',upload.single('file'), (req,res)=>{
     const doc = new Doc(req.body);
 
     doc.save()
@@ -80,6 +118,9 @@ app.post('/ViewPage_Default', (req,res)=>{
     .catch(err => {
       console.log(err);
     });
+
+    res.json({file: req.file});
+    
 });
 
 
