@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include ('./partials/head.ejs') %>
+<!--<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Preview Default</title>
+</head>-->
+<body>
+    <%- include('./partials/nav.ejs') %>
+  <!--  <ul>
+        <li style="margin-left:10px;"><a href="#">New Document</a></li>
+        <li><a href="#" class="active">Files</a></li>
+        <li style="float:right"><a href="#" >Account</a></li>
+      </ul>-->
+
+<div>
+<div Style = "padding:50px;">
+    <label for = "doctype" style = "padding:30px; font-size:20px;">Document Type:</label>
+        <input list="browsers" name="myBrowser" />
+        <datalist id="browsers">
+          <option value="Chrome">
+          <option value="Firefox">
+          <option value="Internet Explorer">
+          <option value="Opera">
+          <option value="Safari">
+          <option value="Microsoft Edge">
+        </datalist>
+        <input type="search" name = "search" id = "search"  placeholder = "search" class = "search">
+</div>
+
+
+</div>
+
+<div class = "Files">
+
+  <div class = 'Doc content' >
+    <h2>All Docs</h2>
+    <div>
+
+      
+      <% if(docs.length > 0) { %>
+          <% docs.forEach(doc => { %>
+              <a href = "/ViewPageDefault/<%= doc._id%>">
+                  <h3 class ="file_Name" style = 'background-color: rgb(205,197,197); display: block;'><%= doc.file_Name %></h3>
+              </a>
+          <% }) %>
+      <% } else { %>
+          <p>There are no documents to display... </p>
+      
+      <% } %>
+    </div>
+</div>
+
+
+
+</div>
+</body>
+</html>
