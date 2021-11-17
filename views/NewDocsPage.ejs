@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include ('./partials/head.ejs') %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
     <title>New Document Page</title>
 </head>
 <body>
+    <%- include('./partials/nav.ejs') %>
+
     <div class="container">
         <div class="row">
             <div class="col-md-6 m-auto">
 
                 <form action="/ViewPage_Default" method="POST" enctype="multipart/form-data">
-                    <div>
-                        <label for="title">File Name:</label>
-                        <input type="text" id="file_Name" name="file_Name" required>
-                    </div>
-
+                    
                     <div>
                         <label for="snippet">Document Group:</label>
                         <input type="text" id="docu_Group" name="docu_Group" required>
+                    </div>
+                    
+                    <div>
+                        <p class = "doc_Type">Document Type:         
+                            <select id ="docu_Type" name="docu_Type">
+                                <option value="placeholder"></option>
+                                <option value="Permit">Permit</option>
+                                <option value="Test1">Test1</option>
+                                <option value="Test2">Test2</option>
+                            </select></p> 
                     </div>
                 
                     <div class="custom-file mb-3">

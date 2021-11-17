@@ -119,11 +119,16 @@ app.post('/ViewPage_Default',upload.single('file'), (req,res)=>{
       console.log(err);
     });
 
-    res.json({file: req.file});
     
 });
 
-
+app.get('/Document_Details/:id', (req, res) =>{
+    const id = req.params.id;
+    Doc.findById(id)
+        .then(result => {
+            res.render('PreviewDetails', {doc: result});
+        });
+});
 
 app.post('/', (req,res)=>{
     let email = req.body.Email;
