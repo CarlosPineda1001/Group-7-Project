@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ('./partials/head.ejs') %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
+    <title>New Document Page</title>
+</head>
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 m-auto">
+
+                <form action="/ViewPage_Default" method="POST" enctype="multipart/form-data">
+                    
+                    <div>
+                        <label for="snippet">Document Group:</label>
+                        <input type="text" id="docu_Group" name="docu_Group" required>
+                    </div>
+                    
+                    <div>
+                        <p class = "doc_Type">Document Type:         
+                            <select id ="docu_Type" name="docu_Type">
+                                <option value="placeholder"></option>
+                                <option value="Permit">Permit</option>
+                                <option value="Test1">Test1</option>
+                                <option value="Test2">Test2</option>
+                            </select></p> 
+                    </div>
+                
+                    <div class="custom-file mb-3">
+                        <input type="file" name="file" id="file" class="custom-file-input">
+                        <label for="file" class="custom-file-label">Choose File</label>
+                    </div>
+
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block">
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

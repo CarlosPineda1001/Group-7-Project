@@ -47,6 +47,7 @@
 
 .sides{
   background-color: rgb(255, 255, 255);
+<<<<<<< HEAD
   width: 60%;
   height: 500px;
   border-radius: 7%;
@@ -55,6 +56,14 @@
 
 body{
   background-color:#ffffff;
+=======
+  width: 400px;
+  height: 500px;
+  border-radius: 7%;
+}
+body{
+  background-color:#5F5F5F;
+>>>>>>> bab05dd780955b945edcf1f722b951b395579c79
 }
 
 h1{
@@ -66,6 +75,7 @@ h1{
   color:black;
 }
 
+<<<<<<< HEAD
 ul {
   list-style-type: none;
   margin: 0;
@@ -103,6 +113,9 @@ li a:hover {
   height: 30px;
   font-size:15px;
 }
+=======
+
+>>>>>>> bab05dd780955b945edcf1f722b951b395579c79
 
 /*--------icons----------------*/
 .input-icons i {

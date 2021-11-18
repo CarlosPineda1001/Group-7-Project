@@ -121,4 +121,17 @@ li a:hover {
   width: 80%;
   padding: 10px;
   text-align: center;
+<<<<<<< HEAD
+=======
+}
+
+.doc_Content{
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 14px 16px;
+  background-color: rgba(243, 239, 239, 0.795);
+  width: 400px;
+  height: 300px;
+  margin: 20px auto 20px;
+>>>>>>> bab05dd780955b945edcf1f722b951b395579c79
 }

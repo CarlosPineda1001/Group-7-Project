@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include ('./partials/head.ejs') %>
+
+<body>
+    <%- include('./partials/nav.ejs') %>
+
+<div>
+<div Style = "padding:50px;">
+    <label for = "doctype" style = "padding:30px; font-size:20px;">Document Type:</label>
+        <input list="browsers" name="myBrowser" />
+        <datalist id="browsers">
+          <option value="Chrome">
+          <option value="Firefox">
+          <option value="Internet Explorer">
+          <option value="Opera">
+          <option value="Safari">
+          <option value="Microsoft Edge">
+        </datalist>
+        <input type="search" name = "search" id = "search"  placeholder = "search" class = "search">
+</div>
+
+
+</div>
+
+<div class = "Files">
+
+  <div class = 'Doc content' >
+    <h2>All Docs</h2>
+    <div>
+
+      
+      <% if(docs.length > 0) { %>
+          <% docs.forEach(doc => { %>
+              <a href = "/Document_Details/<%= doc._id%>">
+                  <h3 class ="docu_Group" style = 'background-color: rgb(205,197,197); display: block;'><%= doc.docu_Group %></h3>
+              </a>
+          <% }) %>
+      <% } else { %>
+          <p>There are no documents to display... </p>
+      
+      <% } %>
+    </div>
+</div>
+
+
+
+</div>
+</body>
+</html>
