@@ -84,7 +84,7 @@ const storage = new GridFsStorage({
 
 
 //lsten to what page
-
+/*
 app.get('/add-account', (req,res)=>{
 
     const account = new Acc({
@@ -103,7 +103,7 @@ app.get('/add-account', (req,res)=>{
                 console.log(err);
             });
         })
-
+*/
         
 app.get('/', (req, res) =>{
    
@@ -175,6 +175,19 @@ app.post('/', (req,res)=>{
 
     }
    
+        Acc.findOne({user_Email: email})
+            .then((user)=>{
+                if(user.user_Password == pass){
+                    
+                  //  console.log("email exists!");
+                    console.log("nakalogin kana boy");
+                   res.redirect('/ViewPage_Default');
+                   // if(pass == )
+                }else{
+                    
+            
+                      }
+            })
 
     console.log(email);
     console.log(pass);
@@ -214,17 +227,25 @@ app.post('/register', (req,res)=>{
                    // errors.push({text: 'email already exists'});
                     console.log("email already exists");
                 }else{
+                    if(confirmPass == pass){
                     console.log(user);
                      account.save()
                              .then((result)=>{
                             console.log(req.body);
-                
-                            res.redirect('/');
-            
+                                
+                            
+                                res.redirect('/');
+                            
+                            
                             })
                             .catch((err)=>{
                                console.log(err);
                              })
+
+                            }else{
+                                console.log("Passwords do not match")
+                            }
+            
                       }
             })
 
