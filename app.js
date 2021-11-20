@@ -226,89 +226,6 @@ app.post('/register', (req,res)=>{
             
                       }
             })
-
-
-
-
-
-
-
-/*
-
-
-
-        let accountCheck = null;
-        
-        
-        
-        
-        
-        
-        
-        
-        let checkEmail = async (userEmail) => {
-            Acc.exists({ user_Email:email })
-            .then((result)=>{
-            console.log(result);
-                return result;
-            })     
-                }
-        
-        
-        let value = checkEmail(email);
-            
-            //PATULONG KAY SEAN SA MONGOOSE
-            function checker(){
-                if(value == false){
-                    account.save()
-                .then((result)=>{
-                    console.log(req.body);
-                
-                    res.redirect('/');
-            
-                })
-                .catch((err)=>{
-                    console.log(err);
-                })
-                }
-                else{
-                    console.log(value);
-                    console.log("The email you have entered already exists");
-                //   console.log(checkEmail(email));
-                }
-            
-            }
-            
-            setTimeout(function () {
-                checker();
-            },3000);*/
-        /* if(email==demo.em && pass==demo.pass){
-
-            console.log("Account already exists");
-
-            }else{
-
-                if(pass == confirmPass){
-
-                    demo2 = {   em: email, 
-                                pass: pass
-                    }
-
-                }
-
-                res.redirect('/');
-
-            }
-        
-
-            console.log(email);
-            console.log(pass);
-            console.log(firstName);
-            console.log(lastName);
-
-            console.log (demo2);
-        // const log = new Login(req.body);
-        // req.*/
 });
 
 // route for ViewPage
@@ -316,7 +233,6 @@ app.use('/ViewPage_Default', ViewPage_DefaultRoutes);
 
 //404 page
 app.use((req,res)=>{
-    //res.status(404).sendFile('./views/404.html', {root:__dirname});
     res.status(404).render('404');
     //use this function for every request if it reaches this point
     //end of the line, only functions when nothing matched
