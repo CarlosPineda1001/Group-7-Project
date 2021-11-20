@@ -46,6 +46,6 @@ const documentSchema =  new Schema({
 });
 
 
-const Doc = mongoose.model('docs.file', documentSchema);
+const Doc = mongoose.model('doc', documentSchema);
 
 module.exports = Doc;

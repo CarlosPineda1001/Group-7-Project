@@ -80,7 +80,6 @@ app.get('/Document_Details/:id', (req, res) =>{
         });
 });
 
-
 //database object viewpage stuff
 app.get('/ViewPage_Default/document/:filename', (req,res)=>{
     //checking if file exists
