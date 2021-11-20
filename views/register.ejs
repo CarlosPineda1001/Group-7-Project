@@ -17,11 +17,11 @@
            
 <div class = "sides" Style = "margin-top:100px;"> 
     <h1>Registration</h1>
-    <form action="/register" method="POST">
+    <form name = "form" action="/register" method="POST" id="contact_form" autocomplete="off">
         <div>
                 <div class="input-icons" style = "padding-top: 10px">
                     <i class="fa fa-envelope icon"></i>
-                    <input type="text" name = "New_Email" id = "New_Email"  placeholder = "Email" class = "input-field" required>
+                    <input type="text" name = "New_Email" id = "newEmail"  placeholder = "Email" class = "input-field" required>
                </div>
                 
                 <div class="input-icons" Style= "padding-top: 10px"> 
@@ -34,18 +34,14 @@
                
                <div class="input-icons">
                     <i class="fa fa-lock icon"></i>
-                    <input type="password" name = "NewPassword1" id = "NewPassword1"  placeholder = "Password" class = "input-field" required>
+                    <input type="password" name = "NewPassword1" id = "newPassword1"  placeholder = "Password" class = "input-field" required>
                 </div>
                 <div class="input-icons">
                     <i class="fa fa-lock icon"></i>
-                    <input type="password" name = "NewPassword2" id = "NewPassword2"  placeholder = "Confirm Password" class = "input-field" required>
+                    <input type="password" name = "NewPassword2" id = "newPassword2"  placeholder = "Confirm Password" class = "input-field" required>
                 </div>
         </div>
 
-    <!--<div class = "buttonsub" >
-    <a href = "#" style = "color:inherit;text-decoration:none"> REGISTER</a>   
-    </div>
-    -->
     <button id = "myBtn" class = "buttonsub" type = "submit">REGISTER</button>
     </form> 
     
@@ -73,7 +69,19 @@ var close = document.getElementsByClassName("close")[0];
 btn.addEventListener('click', openModal);
 
 function openModal() {
-  modal.style.display = 'block';
+  if(document.getElementById("newEmail").value.length == 0)
+  {
+      alert("Please Enter Email")
+    }else if(document.getElementById("fname").value.length == 0){
+      alert("Please Enter First Name")
+    }else if(document.getElementById("lname").value.length == 0){
+      alert("Please Enter Last Name")
+    }else if(document.getElementById("newPassword1").value.length == 0 || document.getElementById("newPassword2").value.length == 0 ){
+      alert("Password input incorrect")
+    }else{
+      modal.style.display = 'block';
+    }
+
 }
 
 //Close Modal

@@ -174,7 +174,6 @@ app.post('/', (req,res)=>{
 
 
 app.post('/register', (req,res)=>{
-
             let email = req.body.New_Email;
             
             let firstName = req.body.fname;
