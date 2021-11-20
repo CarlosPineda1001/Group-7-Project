@@ -179,7 +179,7 @@ app.post('/register', (req,res)=>{
 
         }
 
-        res.redirect('/');
+        //res.redirect('/register');
 
     }
    
