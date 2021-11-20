@@ -4,6 +4,13 @@ const Schema = mongoose.Schema;
 
 
 const documentSchema =  new Schema({
+    fileID:{
+        type: String
+    },
+    file_Name:{
+        type: String,
+        // required: true
+    },
     docu_Group:{
         type: String,
         // required: true
@@ -39,6 +46,6 @@ const documentSchema =  new Schema({
 });
 
 
-const Doc = mongoose.model('Doc', documentSchema);
+const Doc = mongoose.model('docs.file', documentSchema);
 
 module.exports = Doc;

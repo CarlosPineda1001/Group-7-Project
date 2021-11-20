@@ -66,7 +66,6 @@ app.get('/Login_Page', (req, res) =>{
 
 // doc routes
 
-
 app.get('/NewDocs', (req, res) =>{
    
     res.render('NewDocsPage');
@@ -80,6 +79,32 @@ app.get('/Document_Details/:id', (req, res) =>{
             res.render('PreviewDetails', {doc: result});
         });
 });
+
+
+//database object viewpage stuff
+app.get('/ViewPage_Default/document/:filename', (req,res)=>{
+    //checking if file exists
+    gfs.files.findOne({filename:req.params.filename}, (err, files) =>{
+        if(!files || files.length == 0){
+            return res.status(404).json({
+                err: 'no file'
+            });
+        }
+        //checking if file is an image type
+        if(files.contentType=== 'image/jpeg' || files.contentType=== 'image/png'){
+
+
+            //displaying docs.chunks.data
+            const readstream = gfs.createReadStream(files.filename);
+            readstream.pipe(res);
+        }else{
+            res.status(404).json({
+                err: 'not an image'
+            });
+        }
+    });    
+});
+
 
 app.post('/', (req,res)=>{
     let email = req.body.Email;
