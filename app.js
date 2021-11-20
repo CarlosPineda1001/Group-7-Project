@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
 
+const ViewPage_DefaultRoutes = require('./routes/ViewPage_DefaultRoutes');
 const Doc = require('./Models/document_Schema');
 const Acc = require('./Models/account_Schema');
 
