@@ -62,7 +62,7 @@ const storage = new GridFsStorage({
           if (err) {
             return reject(err);
           }
-          const filename = buf.toString('hex') + path.extname(file.originalname);
+          const filename = buf.toString('hex');
           const fileInfo = {
             filename: filename,
             bucketName: 'docs'
@@ -95,7 +95,7 @@ app.get('/Login_Page', (req, res) =>{
 app.get('/ViewPage_Default', (req,res)=>{
     Doc.find().sort({ createdAt: -1})
         .then((result) =>{
-            res.render('ViewPageDefault', {docs: result});
+            res.render('ViewPageDefault', {docs: result, });
         })
         .catch((err)=>{
             console.log(err);
@@ -110,7 +110,6 @@ app.get('/NewDocs', (req, res) =>{
 
 app.post('/ViewPage_Default',upload.single('file'), (req,res)=>{
     const doc = new Doc(req.body);
-
     doc.save()
     .then(result => {
       res.redirect('/ViewPage_Default');
@@ -119,10 +118,34 @@ app.post('/ViewPage_Default',upload.single('file'), (req,res)=>{
       console.log(err);
     });
 
-    res.json({file: req.file});
+
     
 });
 
+//database object viewpage stuff
+
+app.get('/ViewPage_Default/document/:filename', (req,res)=>{
+    //checking if file exists
+    gfs.files.findOne({filename:req.params.filename}, (err, files) =>{
+        if(!files || files.length == 0){
+            return res.status(404).json({
+                err: 'no file'
+            });
+        }
+        //checking if file is an image type
+        if(files.contentType=== 'image/jpeg' || files.contentType=== 'image/png'){
+
+
+            //displaying docs.chunks.data
+            const readstream = gfs.createReadStream(files.filename);
+            readstream.pipe(res);
+        }else{
+            res.status(404).json({
+                err: 'not an image'
+            });
+        }
+    });    
+});
 
 
 app.post('/', (req,res)=>{

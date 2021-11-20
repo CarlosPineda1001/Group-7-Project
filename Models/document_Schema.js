@@ -4,11 +4,30 @@ const Schema = mongoose.Schema;
 
 
 const documentSchema =  new Schema({
+    fileID:{
+        type: String
+    },
     file_Name:{
         type: String,
         // required: true
     },
     docu_Group:{
+        type: String,
+        // required: true
+    },
+    length:{
+        type: Number,
+        // required: true
+    },
+    chunkSize:{
+        type: Number,
+        // required: true
+    },
+    uploadDate:{
+        type: Date,
+        // required: true
+    },
+    contentType:{
         type: String,
         // required: true
     },
@@ -43,6 +62,6 @@ const documentSchema =  new Schema({
 });
 
 
-const Doc = mongoose.model('Doc', documentSchema);
+const Doc = mongoose.model('docs.file', documentSchema);
 
 module.exports = Doc;
