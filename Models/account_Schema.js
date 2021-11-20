@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
-const schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 //template of the user accounts
 
 
 const accountSchema =  new Schema({
-    user_ID:{
-        type: int,
+    /*user_ID:{
+        type: String,
+        required: true
+    },*/
+    user_Email:{
+        type: String,
         required: true
     },
     f_Name:{
@@ -16,21 +20,19 @@ const accountSchema =  new Schema({
         type: String,
         required: true
     },
-    user_Email:{
-        type: String,
-        required: true
-    },
+    
     user_Password:{
         type: String,
         required: true
     },
     user_ProfileImg_ID:{
-        type: int,
-        required: true
-    }
-});
+        type: String,
+      //  required: true
+    },
+
+}, {timestamps: true});
 
 
-const Acc = mongoose.model('Acc', accountSchema);
+//const Acc = mongoose.model('Acc', accountSchema);
 
-module.export = Acc;
+module.exports = Acc = mongoose.model('Acc', accountSchema);
