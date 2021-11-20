@@ -1,13 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const path = require('path');
-const crypto = require('crypto');
-const multer = require('multer');
 const mongoose = require('mongoose');
-const {GridFsStorage} = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
 
+const ViewPage_DefaultRoutes = require('./routes/ViewPage_DefaultRoutes');
 const Doc = require('./Models/document_Schema');
 
 
@@ -51,30 +48,6 @@ datab.once('open', () => {
     gfs.collection('docs');
 })
 
-
-
-// create storage engine
-const storage = new GridFsStorage({
-    url: dbURI,
-    file: (req, file) => {
-      return new Promise((resolve, reject) => {
-        crypto.randomBytes(16, (err, buf) => {
-          if (err) {
-            return reject(err);
-          }
-          const filename = buf.toString('hex') + path.extname(file.originalname);
-          const fileInfo = {
-            filename: filename,
-            bucketName: 'docs'
-          };
-          resolve(fileInfo);
-        });
-      });
-    }
-  });
-  const upload = multer({ storage })
-
-
 //lsten to what page
 app.get('/', (req, res) =>{
    
@@ -92,15 +65,7 @@ app.get('/Login_Page', (req, res) =>{
 });
 
 // doc routes
-app.get('/ViewPage_Default', (req,res)=>{
-    Doc.find().sort({ createdAt: -1})
-        .then((result) =>{
-            res.render('ViewPageDefault', {docs: result});
-        })
-        .catch((err)=>{
-            console.log(err);
-        });
-});
+
 
 app.get('/NewDocs', (req, res) =>{
    
@@ -108,22 +73,13 @@ app.get('/NewDocs', (req, res) =>{
     
 });
 
-app.post('/ViewPage_Default',upload.single('file'), (req,res)=>{
-    const doc = new Doc(req.body);
-
-    doc.save()
-    .then(result => {
-      res.redirect('/ViewPage_Default');
-    })
-    .catch(err => {
-      console.log(err);
-    });
-
-    res.json({file: req.file});
-    
+app.get('/Document_Details/:id', (req, res) =>{
+    const id = req.params.id;
+    Doc.findById(id)
+        .then(result => {
+            res.render('PreviewDetails', {doc: result});
+        });
 });
-
-
 
 app.post('/', (req,res)=>{
     let email = req.body.Email;
@@ -189,7 +145,8 @@ app.post('/register', (req,res)=>{
    // req.
 });
 
-
+// route for ViewPage
+app.use('/ViewPage_Default', ViewPage_DefaultRoutes);
 
 //404 page
 app.use((req,res)=>{

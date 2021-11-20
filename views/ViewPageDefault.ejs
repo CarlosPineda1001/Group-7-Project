@@ -2,21 +2,9 @@
 <html lang="en">
 
 <%- include ('./partials/head.ejs') %>
-<!--<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Preview Default</title>
-</head>-->
+
 <body>
     <%- include('./partials/nav.ejs') %>
-  <!--  <ul>
-        <li style="margin-left:10px;"><a href="#">New Document</a></li>
-        <li><a href="#" class="active">Files</a></li>
-        <li style="float:right"><a href="#" >Account</a></li>
-      </ul>-->
 
 <div>
 <div Style = "padding:50px;">
@@ -45,8 +33,8 @@
       
       <% if(docs.length > 0) { %>
           <% docs.forEach(doc => { %>
-              <a href = "/ViewPageDefault/<%= doc._id%>">
-                  <h3 class ="file_Name" style = 'background-color: rgb(205,197,197); display: block;'><%= doc.file_Name %></h3>
+              <a href = "/Document_Details/<%= doc._id%>">
+                  <h3 class ="docu_Group" style = 'background-color: rgb(205,197,197); display: block;'><%= doc.docu_Group %></h3>
               </a>
           <% }) %>
       <% } else { %>

@@ -1,12 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Preview Details</title>
-</head>
+
+    <%- include ('./partials/head.ejs') %>
+
 <body>
+
+    <%- include('./partials/nav.ejs') %>
+
+    <div class = 'doc_Content'>
+        <div>
+            <label for="doc_Group">Document Group:</label>
+                <input type="text" id="docu_Group" name="docu_Group" value= "<%= doc.docu_Group %>">
+        </div>
+
+        <div>
+            <p class = "doc_Type">Document Type:         
+                <select id="list">
+                    <option value="placeholder"><%= doc.docu_Type %></option>
+                    <option value="Permit">Permit</option>
+                    <option value="Test1">Test1</option>
+                    <option value="Test2">Test2</option>
+                </select></p> 
+        </div>
+
+        <div>
+            <label for="doc_Group">Date Issued:</label>
+                <input type="text" id="date_Issued" name="date_Issued" value= "<%= doc.date_Issued %>">
+        </div>
+
+        <div>
+            <label for="doc_Group">Expiration Date:</label>
+                <input type="text" id="doc_group" name="doc_group" value= "<%= doc.date_Exp %>">
+        </div>
+
+        <div>
+            <label for="doc_Group">Prerequisite Files:</label>
+                <input type="text" id="#" name="#" value= "">
+        </div>
+
+        <p class = "date_Created">Data Created: </p>
+        <p class = "created_By"> Created By: </p>
+        <p class = "date_Lmodified">Last Modified: </p>
+        <p class = "modded_by">Modified By: </p>
+
+    </div>
     
+
 </body>
 </html>
