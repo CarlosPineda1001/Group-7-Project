@@ -8,7 +8,10 @@
 
     <title>Register Page</title>
 </head>
+
 <body>
+    <%- include('./partials/nav.ejs') %>
+
     <div>
 <center>
            
@@ -18,24 +21,24 @@
         <div>
                 <div class="input-icons" style = "padding-top: 10px">
                     <i class="fa fa-envelope icon"></i>
-                    <input type="text" name = "New_Email" id = "New_Email"  placeholder = "Email" class = "input-field">
+                    <input type="text" name = "New_Email" id = "New_Email"  placeholder = "Email" class = "input-field" required>
                </div>
                 
                 <div class="input-icons" Style= "padding-top: 10px"> 
                 <i class= "fa fa-user-circle icon"></i> 
-                    <input type="text" name = "fname" id = "fname"  placeholder = "First Name" class = "input-field2">
+                    <input type="text" name = "fname" id = "fname"  placeholder = "First Name" class = "input-field2" required>
                     <i class= "fa fa-user-circle icon"></i> 
-                    <input type="text" name = "lname" id = "lname"  placeholder = "Last Name" class = "input-field2">
+                    <input type="text" name = "lname" id = "lname"  placeholder = "Last Name" class = "input-field2" required>
                 </div>           
                
                
                <div class="input-icons">
                     <i class="fa fa-lock icon"></i>
-                    <input type="password" name = "NewPassword1" id = "NewPassword1"  placeholder = "Password" class = "input-field">
+                    <input type="password" name = "NewPassword1" id = "NewPassword1"  placeholder = "Password" class = "input-field" required>
                 </div>
                 <div class="input-icons">
                     <i class="fa fa-lock icon"></i>
-                    <input type="password" name = "NewPassword2" id = "NewPassword2"  placeholder = "Confirm Password" class = "input-field">
+                    <input type="password" name = "NewPassword2" id = "NewPassword2"  placeholder = "Confirm Password" class = "input-field" required>
                 </div>
         </div>
 
@@ -43,10 +46,55 @@
     <a href = "#" style = "color:inherit;text-decoration:none"> REGISTER</a>   
     </div>
     -->
-    <button class = "buttonsub" type = "submit">REGISTER</button>
+    <button id = "myBtn" class = "buttonsub" type = "submit">REGISTER</button>
     </form> 
     
     </div>
 </center>
+
+<div id="myModal" class="modal">
+
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <center>
+        <p>User has Been Successfully Registered.</p>
+      </center>
+    </div>
+  
+  </div>
+
+<!----------------------Scripting for Modal------------------------------->
+<script>
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("myBtn");
+var close = document.getElementsByClassName("close")[0];
+
+// Open Modal
+btn.addEventListener('click', openModal);
+
+function openModal() {
+  modal.style.display = 'block';
+}
+
+//Close Modal
+
+close.onclick = function() {
+  modal.style.display = "none";
+}
+
+//Outside Click Close
+
+window.addEventListener('click', clickOutside);
+
+function clickOutside(e) {
+    if(e.target == modal){
+        modal.style.display = 'none';
+    }
+}
+
+
+</script>
+
+
 </body>
 </html>

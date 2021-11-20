@@ -47,7 +47,6 @@
 
 .sides{
   background-color: rgb(255, 255, 255);
-<<<<<<< HEAD
   width: 60%;
   height: 500px;
   border-radius: 7%;
@@ -56,14 +55,6 @@
 
 body{
   background-color:#ffffff;
-=======
-  width: 400px;
-  height: 500px;
-  border-radius: 7%;
-}
-body{
-  background-color:#5F5F5F;
->>>>>>> bab05dd780955b945edcf1f722b951b395579c79
 }
 
 h1{
@@ -75,7 +66,6 @@ h1{
   color:black;
 }
 
-<<<<<<< HEAD
 ul {
   list-style-type: none;
   margin: 0;
@@ -113,9 +103,6 @@ li a:hover {
   height: 30px;
   font-size:15px;
 }
-=======
-
->>>>>>> bab05dd780955b945edcf1f722b951b395579c79
 
 /*--------icons----------------*/
 .input-icons i {
@@ -128,18 +115,75 @@ li a:hover {
 }
 
 .icon {
-  padding: 10px;
+  padding: 15px;
   min-width: 40px;
 }
 
 .input-field {
   width: 80%;
+  height: 10%;
+  font-size: 20px;
   padding: 10px;
-  text-align: center;
+  text-align: left;
+  padding-left: 50px;
 }
 
 .input-field2 {
   width: 40%;
   padding: 10px;
-  text-align: center;
+  height: 10%;
+  font-size: 20px;
+  text-align:left;
+  padding-left: 50px;
+}
+
+/*--------Modal Content------*/
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 55%; /* Could be more or less, depending on screen size */
+  border-radius: 10px;
+  animation-name:modalopen;
+  animation-duration: 1s;
+  font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 40px;
+
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+@keyframes modalopen{
+  from{opacity: 0}
+  to{opacity: 1}
 }
