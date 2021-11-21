@@ -39,7 +39,11 @@ const viewPage_index = (req, res) =>{
 }
 
 const viewPage_Post_ImageAndDetails = (upload.single('file'), (req,res) =>{
-    const doc = new Doc(req.body);
+    const doc = new Doc({
+    docu_Group: req.body.docu_Group,
+    docu_Type: req.body.docu_Type,
+    fileID: req.file.filename
+    });
 
     doc.save()
     .then(result => {

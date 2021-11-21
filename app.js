@@ -1,13 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
+const crypto = require('crypto');
+const multer = require('multer');
 const mongoose = require('mongoose');
+const {GridFsStorage} = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
 
 const ViewPage_DefaultRoutes = require('./routes/ViewPage_DefaultRoutes');
 const Doc = require('./Models/document_Schema');
 const Acc = require('./Models/account_Schema');
-
 
 //express app
 //instance of express app
@@ -53,6 +56,7 @@ datab.once('open', () => {
     gfs = Grid(datab.db, mongoose.mongo);
     gfs.collection('docs');
 })
+
 
 //lsten to what page
 /*

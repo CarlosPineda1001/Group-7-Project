@@ -8,6 +8,11 @@
     <%- include('./partials/nav.ejs') %>
 
     <div class = 'doc_Content'>
+        <div class = "docu">
+            <h2>File</h2>
+            
+        <center> <embed src="http://localhost:3000/ViewPage_Default/document/<%= doc.fileID %>" width = "500" height="500" ></center>
+        </div>
         <div>
             <label for="doc_Group">Document Group:</label>
                 <input type="text" id="docu_Group" name="docu_Group" value= "<%= doc.docu_Group %>">
@@ -38,7 +43,7 @@
                 <input type="text" id="#" name="#" value= "">
         </div>
 
-        <p class = "date_Created">Data Created: </p>
+        <p class = "date_Created">Data Created:<%= doc.date_Created%> </p>
         <p class = "created_By"> Created By: </p>
         <p class = "date_Lmodified">Last Modified: </p>
         <p class = "modded_by">Modified By: </p>
