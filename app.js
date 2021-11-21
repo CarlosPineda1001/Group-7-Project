@@ -1,10 +1,9 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
 
 const ViewPage_DefaultRoutes = require('./routes/ViewPage_DefaultRoutes');
+
 const Doc = require('./Models/document_Schema');
 const Acc = require('./Models/account_Schema');
 
@@ -25,13 +24,12 @@ app.set('view engine', 'ejs');
 
 app.use(express.static('css'));
 app.use(express.urlencoded({extended: true})); //used for accepting form data
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(methodOverride('_method'));
 
 
 // connect to mongodb
-
-const dbURI = 'mongodb+srv://Marcus:gangplank@mongouploads.zxnhp.mongodb.net/Document_Database?retryWrites=true&w=majority';
+const dbURI = 'mongodb+srv://Carlos:XpaZ@mongouploads.zxnhp.mongodb.net/Document_Database?retryWrites=true&w=majority';
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => {
         app.listen(3000, () =>{
@@ -40,42 +38,40 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
     })
     .catch((err) => console.log(err));
 
-   
-let datab = mongoose.connection;
+// let datab = mongoose.connection;
 
-// Init gfs
+// // Init gfs
+// let gfs;
+
+// datab.once('open', () => {
+//     gfs = Grid(datab.db, mongoose.mongo);
+//     gfs.collection('docs');
+// })
 
 
 
-let gfs;
-
-datab.once('open', () => {
-    gfs = Grid(datab.db, mongoose.mongo);
-    gfs.collection('docs');
-})
+// // create storage engine
+// const storage = new GridFsStorage({
+//     url: dbURI,
+//     file: (req, file) => {
+//       return new Promise((resolve, reject) => {
+//         crypto.randomBytes(16, (err, buf) => {
+//           if (err) {
+//             return reject(err);
+//           }
+//           const filename = buf.toString('hex') + path.extname(file.originalname);
+//           const fileInfo = {
+//             filename: filename,
+//             bucketName: 'docs'
+//           };
+//           resolve(fileInfo);
+//         });
+//       });
+//     }
+//   });
+//   const upload = multer({ storage })
 
 //lsten to what page
-/*
-app.get('/add-account', (req,res)=>{
-
-    const account = new Acc({
-       //user_ID: '00001',
-        f_Name: 'Caitlyn',
-        l_Name: "Kiramman",
-        user_Email: 'caitk@gmail.com',
-        user_Password: 'arcane2021',
-        user_ProfileImg_ID: '123'
-    });
-        account.save()
-            .then((result)=>{
-             res.send(result)
-        })
-            .catch((err)=>{
-                console.log(err);
-            });
-        })
-*/
-        
 app.get('/', (req, res) =>{
    
     res.render('Loginpage', {title: name});
@@ -84,24 +80,43 @@ app.get('/', (req, res) =>{
 app.get('/register', (req, res) =>{
 
     res.render('Register');
-
 });
-
-
 
 app.get('/Login_Page', (req, res) =>{
 
    res.render('Loginpage');
 });
 
-
-// doc routes
+// // doc routes
+// app.get('/ViewPage_Default', (req,res)=>{
+//     Doc.find().sort({ createdAt: -1})
+//         .then((result) =>{
+//             res.render('ViewPageDefault', {docs: result});
+//         })
+//         .catch((err)=>{
+//             console.log(err);
+//         });
+// });
 
 app.get('/NewDocs', (req, res) =>{
    
     res.render('NewDocsPage');
     
 });
+
+// app.post('/ViewPage_Default',upload.single('file'), (req,res)=>{
+//     const doc = new Doc(req.body);
+
+//     doc.save()
+//     .then(result => {
+//       res.redirect('/ViewPage_Default');
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+
+    
+// });
 
 app.get('/Document_Details/:id', (req, res) =>{
     const id = req.params.id;
@@ -172,7 +187,6 @@ app.post('/', (req,res)=>{
 
 });
 
-
 app.post('/register', (req,res)=>{
             let email = req.body.New_Email;
             
@@ -227,7 +241,7 @@ app.post('/register', (req,res)=>{
             })
 });
 
-// route for ViewPage
+//route for ViewPage
 app.use('/ViewPage_Default', ViewPage_DefaultRoutes);
 
 //404 page
