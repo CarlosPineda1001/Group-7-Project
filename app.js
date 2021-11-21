@@ -91,6 +91,12 @@ app.get('/Login_Page', (req, res) =>{
    res.render('Loginpage');
 });
 
+app.get('/account_details', (req, res) =>{
+
+    res.render('AccountDetails');
+ });
+
+
 // doc routes
 app.get('/ViewPage_Default', (req,res)=>{
     Doc.find().sort({ createdAt: -1})
