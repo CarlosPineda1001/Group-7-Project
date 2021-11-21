@@ -1,0 +1,105 @@
+<html>
+<head>
+   <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Register Page</title>
+</head>
+
+<body>
+  <ul>
+    <li style="margin-left:10px;"><a href="/NewDocs">New Document</a></li>
+    <li><a href="/ViewPage_Default" >Files</a></li>
+    <li style="float:right"><a href="#" class="active">Account</a></li>
+</ul>
+
+
+<div>
+  <h2>PHOTO:</h2>
+</div>
+<hr></hr>
+
+<div>
+  <h2>FIRST NAME:</h2>
+</div>
+<hr></hr>
+<div>
+  <h2>LAST NAME:</h2>
+</div>
+<hr></hr>
+<div>
+  <h2>EMAIL:</h2>
+</div>
+<hr></hr>
+<button id="myBtn" >RESET PASSWORD</button>
+
+<div id="myModal" class="modal">
+
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <center>
+      <p>Reset Password</p>
+<form>
+  <div class="input-icons">
+    <i class="fa fa-lock icon"></i>
+    <input type="password" name = "oldPassword" id = "oldPassword"  placeholder = "Old Password" class = "input-field2" required>
+</div>
+<div class="input-icons">
+  <i class="fa fa-lock icon"></i>
+  <input type="password" name = "NewPassword1" id = "newPassword1"  placeholder = "New Password" class = "input-field2" required>
+</div>
+<div class="input-icons">
+  <i class="fa fa-lock icon"></i>
+  <input type="password" name = "NewPassword2" id = "newPassword2"  placeholder = "Confirm New Password" class = "input-field2" required>
+</div>
+
+<button>SUBMIT</button>
+
+</form>
+      
+    </center>
+  </div>
+
+</div>
+
+
+
+<!----------------------Scripting for Modal------------------------------->
+<script>
+var modal = document.getElementById("myModal");
+var btn = document.getElementById("myBtn");
+var close = document.getElementsByClassName("close")[0];
+
+// Open Modal
+btn.addEventListener('click', openModal);
+
+function openModal() {
+      modal.style.display = 'block';
+    }
+
+
+//Close Modal
+
+close.onclick = function() {
+  modal.style.display = "none";
+}
+
+//Outside Click Close
+
+window.addEventListener('click', clickOutside);
+
+function clickOutside(e) {
+    if(e.target == modal){
+        modal.style.display = 'none';
+    }
+}
+
+
+</script>
+
+
+</body>
+</html>

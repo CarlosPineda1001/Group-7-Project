@@ -50,6 +50,10 @@ app.get('/Login_Page', (req, res) =>{
    res.render('Loginpage');
 });
 
+app.get('/account_details', (req, res) => {
+    res.render('AccountDetails');
+});
+
 app.get('/NewDocs', (req, res) =>{
     res.render('NewDocsPage');
 });
