@@ -1,5 +1,35 @@
-<ul>
-    <li style="margin-left:10px;"><a href="/NewDocs">New Document</a></li>
-    <li><a href="/ViewPage_Default" class="active">Files</a></li>
-    <li style="float:right"><a href="/account_details" >Account</a></li>
-</ul>
+<div class="topnav" id="myTopnav">
+  <a href="/NewDocs">New Document</a>
+  <a href="/ViewPage_Default">Files</a>
+  <div class="dropdown">
+    <button class="dropbtn" >Account
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="/account_details">Account Details</a>
+      <a href="/">Sign Out</a>
+    </div>
+  </div>
+  <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+
+
+<script>
+  function myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "topnav";
+    }
+  }
+
+function testFunction(){
+  console.log("function is working");
+}
+
+</script>
+
+
+
+
