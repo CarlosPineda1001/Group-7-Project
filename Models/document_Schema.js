@@ -4,9 +4,7 @@ const Schema = mongoose.Schema;
 
 
 const documentSchema =  new Schema({
-    fileID:{ 
-        type: String,
-    },
+    file_ID:[String],
     file_Name:{
         type: String,
         // required: true
@@ -28,7 +26,7 @@ const documentSchema =  new Schema({
        // required: true
     },
     date_Created:{
-        type: Date, default: Date.now
+        type: Date, default: Date.now()
        // required: true
     },
     date_Lmodified:{
