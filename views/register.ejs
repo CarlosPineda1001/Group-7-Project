@@ -3,8 +3,10 @@
    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <link rel="stylesheet" href="/register.css">
+    <link rel="stylesheet" href="/main.css">  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
 
     <title>Register Page</title>
 </head>
@@ -15,32 +17,42 @@
     <div>
 <center>
            
-<div class = "sides" Style = "margin-top:100px;"> 
+<div class = "sides"> 
     <h1>Registration</h1>
     <form name = "form" action="/register" method="POST" id="contact_form" autocomplete="off">
-        <div>
+          
+      <div class="row">
                 <div class="input-icons" style = "padding-top: 10px">
                     <i class="fa fa-envelope icon"></i>
                     <input type="text" name = "New_Email" id = "newEmail"  placeholder = "Email" class = "input-field" required>
                </div>
-                
-                <div class="input-icons" Style= "padding-top: 10px"> 
-                <i class= "fa fa-user-circle icon"></i> 
+            </div>
+
+                <div class="row">
+                  <div class="input-icons" > 
+                    <i class= "fa fa-user-circle icon"></i> 
                     <input type="text" name = "fname" id = "fname"  placeholder = "First Name" class = "input-field2" required>
                     <i class= "fa fa-user-circle icon"></i> 
                     <input type="text" name = "lname" id = "lname"  placeholder = "Last Name" class = "input-field2" required>
-                </div>           
-               
-               
-               <div class="input-icons">
+                  </div>    
+                </div>
+
+
+                <div class="row">
+                  <div class="input-icons">
                     <i class="fa fa-lock icon"></i>
                     <input type="password" name = "NewPassword1" id = "newPassword1"  placeholder = "Password" class = "input-field" required>
+                  </div>
                 </div>
-                <div class="input-icons">
+               
+                <div class="row">
+                  <div class="input-icons">
                     <i class="fa fa-lock icon"></i>
                     <input type="password" name = "NewPassword2" id = "newPassword2"  placeholder = "Confirm Password" class = "input-field" required>
+                  </div>
                 </div>
-        </div>
+
+
 
     <button id = "myBtn" class = "buttonsub" type = "submit">REGISTER</button>
     </form> 
