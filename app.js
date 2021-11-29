@@ -184,6 +184,7 @@ app.post('/', (req,res)=>{
 
 });
 
+//creation of new document in system
 app.post('/ViewPage_Default',upload.array('file',12), (req,res, next)=>{
     //file_ID array
     let fileIDs = [];
@@ -209,6 +210,7 @@ app.post('/ViewPage_Default',upload.array('file',12), (req,res, next)=>{
     });
 });
 
+//displaying document additional details
 app.get('/Document_Details/:id', (req, res) =>{
     const id = req.params.id;
 
@@ -217,6 +219,25 @@ app.get('/Document_Details/:id', (req, res) =>{
             res.render('PreviewDetails', {doc: result});
         });
 });
+
+//add attach files
+app.post('/Document_Details/:id', upload.single('attch_file'), (req, res) =>{
+    const id = req.params.id;
+    Doc.findByIdAndUpdate(id,{
+        attach_FileID: req.file.filename
+    },(err, result)=>{
+
+        if(err){
+            res.send(err)
+        }
+        else{
+            res.render('PreviewDetails', {doc: result})
+        }
+
+    })
+});
+
+
 
 
 app.post('/register', (req,res)=>{
