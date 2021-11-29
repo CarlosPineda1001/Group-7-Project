@@ -66,7 +66,7 @@ app.use(methodOverride('_method'));
 const dbURI = 'mongodb+srv://Carlos:XpaZ@mongouploads.zxnhp.mongodb.net/Document_Database?retryWrites=true&w=majority';
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => {
-        app.listen(3000, () =>{
+        app.listen(process.env.PORT || 5000, '0.0.0.0', () =>{
             console.log('Server started');
         }); 
     })
