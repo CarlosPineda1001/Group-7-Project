@@ -11,21 +11,83 @@
 <div>
   <h2>PHOTO:</h2>
 </div>
+
+
 <hr></hr>
 
 <div>
-  <h2>FIRST NAME:</h2>
+  <h2>FIRST NAME: <input name="FirstName" id = "fname" type="text" value = "Macky" disabled = "disabled"/> </h2>
 </div>
+
+
 <hr></hr>
 <div>
-  <h2>LAST NAME:</h2>
+
+  <h2>LAST NAME: <input name="LastName" id = "lname" value = "Jarabe" type="text" disabled = "disabled"/></h2>
+ 
 </div>
+
+
 <hr></hr>
+
 <div>
-  <h2>EMAIL:</h2>
+  <h2>EMAIL: <input name="Email" id = "email" value = "mackyjarabe@gmail.com" type="text" disabled = "disabled" /></h2>
 </div>
+
+
+<input type="submit" style="visibility: hidden; position: absolute;" />
+
+</form>
+
+
+<div>
 <hr></hr>
 <button id="myBtn" >RESET PASSWORD</button>
+
+
+
+<script type = "text/javascript">
+
+let editPressed = false
+
+let fname = document.getElementById("fname");
+let lname = document.getElementById("lname");
+let email = document.getElementById("email");
+//EnableDisableTB();
+
+function edit(){
+
+
+  editPressed = true;
+  //alert(fname.value);
+  fname.removeAttribute("disabled");
+  lname.removeAttribute("disabled");
+  email.removeAttribute("disabled");
+ 
+  // EnableDisableTB();
+}
+
+
+ /* function EnableDisableTB(){
+   /*var fname = document.getElementById("fname");
+    
+   fname.disabled = true;
+    if(fname.disabled){*/
+     // others = others.disabled;
+   //   fname.focus();
+ //   }
+  
+
+
+</script>
+
+
+
+
+
+
+
+
 
 <div id="myModal" class="modal">
 
@@ -33,7 +95,7 @@
     <span class="close">&times;</span>
     <center>
       <p>Reset Password</p>
-<form>
+
   <div class="input-icons">
     <i class="fa fa-lock icon"></i>
     <input type="password" name = "oldPassword" id = "oldPassword"  placeholder = "Old Password" class = "input-field2" required>

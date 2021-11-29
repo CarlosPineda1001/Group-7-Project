@@ -9,7 +9,7 @@
     <title>Login Page</title>
     <script src="js/script.js"></script>
 </head>
-<body>
+<body onload = "getCookieData()">
 
 
     <div>
@@ -29,7 +29,7 @@
                 </div>
         </div>
 
-<input type="checkbox" id="remember" name="remember_me" value="remember">
+<input type="checkbox" id="remember" name="remember_me" value="remember" onclick = "setcookie()">
 <label for ="remember" style = "font-size:13px;">Remember me</label><br>
         
     <button class = "button" type = "submit">SIGN IN</button>
@@ -38,6 +38,35 @@
         <a href = "ViewPageDefault" style = "color:inherit;text-decoration:none; "> SIGN IN</a>
         </div>-->
     </form>
+
+    <script type = "text/javascript">
+
+        function setCookie(){
+            var email = document.getElementById('Email').value;
+            var pass = document.getElementById('Pword').value;
+       
+            document.cookie = "myuserName =" + email +";path = http://localhost/3000/";
+            document.cookie = "mypw =" + pass+";path = http://localhost/3000/";
+       
+        
+       
+       
+       
+        }
+
+        function getCookieData(){
+            //console.log(document.cookie)
+
+           var email = getCookie('myuserName');
+            var pass = getCookie('mypw');
+
+            document.getElementById('Email').value = email;
+            document.getElementById('Pword').value = pass;
+        }
+
+        
+
+    </script>
 <!---<div class="text"><text Style = "font-size:15px;">
     Need an Account?</text>
 </div>
