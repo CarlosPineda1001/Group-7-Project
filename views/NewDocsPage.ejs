@@ -9,17 +9,27 @@
 <body>
     <%- include('./partials/nav.ejs') %>
 
-    <div class="container" style="background-color:grey; padding: 40px; z-index:0;">
+<div>
+    Insert image stuff here
+</div>
+
+
+
+
+
+
+<form action="/ViewPage_Default" method="POST" enctype="multipart/form-data">
+    <div class="container" style="background-color:rgb(182, 182, 182); padding: 40px; z-index:0; width: 60%; margin-top:100px;">
         <div class="row">
             <div class="col">
 
-                <form action="/ViewPage_Default" method="POST" enctype="multipart/form-data">
+                
                     
                     <center>
                         <label for="snippet">Document Group:</label>
                         <input type="text" id="docu_Group" name="docu_Group" style ="width: 60%; height: 35px; margin-right:11px; " >
                     </center>
-                    q     
+                         
                     <center>
                         <p class = "doc_Type">Document Type:         
                             <select id ="docu_Type" name="docu_Type" style ="width: 60%; height: 35px; margin-top:10px;">
@@ -33,22 +43,21 @@
                 
                 <div style ="margin-right: 10px;">
                 <center>
-                    <label for="snippet">Document Group:</label>
+                    <label for="snippet"></label>
                     <div class="custom-file mb-3" style ="width: 60%; height: 35px;" >
                         <input type="file" name="file" id="file" class="custom-file-input" multiple>
-                        <label for="file" class="custom-file-label" style = "text-align:left;">Choose file</label>
+                        <label for="file" class="custom-file-label" style = "text-align:left; margin-left: 60px">Choose file</label>
                     </div>
                 </center>
                  </div>
-                
-                 <button type="submit" value="Submit" class="btn btn-primary btn-block">Upload</button>
-                </form>
+
+
                     
                 
             </div>
         </div>
     </div>
-        
-    
+    <center><button type="submit" value="Submit" class="btn btn-primary btn-block" style ="width: 30%;  height: 60px; margin-top: 30px;">Upload</button></center>
+</form>
 </body>
 </html>

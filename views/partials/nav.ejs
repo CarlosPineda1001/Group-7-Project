@@ -1,32 +1,42 @@
-<div class="topnav" id="myTopnav">
+
+<div class="topnav" id="myTopnav" >
   <a href="/NewDocs">New Document</a>
   <a href="/ViewPage_Default">Files</a>
-  <div class="dropdown">
+  <div class="dropdown"style >
     <button class="dropbtn" >Account
       <i class="fa fa-caret-down"></i>
     </button>
-    <div class="dropdown-content">
+    <div class="dropdown-content" >
       <a href="/account_details">Account Details</a>
       <a href="/">Sign Out</a>
     </div>
   </div>
+
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
 </div>
 
+<div style="background-color:rgb(255, 255, 255); padding: 40px; z-index:0; width: 100%; box-shadow: 5px 5px 5px grey;"></div>
+
+<div style="padding-top:100px"></div>
 
 <script>
   function myFunction() {
     var x = document.getElementById("myTopnav");
     if (x.className === "topnav") {
-      x.className += " responsive";
+      x.className += " responsive";z
     } else {
       x.className = "topnav";
     }
   }
 
-function testFunction(){
-  console.log("function is working");
-}
+const currentLocation = location.href;
+const menuItem = document.querySelectorAll('a');
+const menuLength = menuItem.length;
+  for(let i = 0; menuLength; i++){
+    if(menuItem[i].href === currentLocation){
+     menuItem[i].className = "active";
+    }
+  }
 
 </script>
 
