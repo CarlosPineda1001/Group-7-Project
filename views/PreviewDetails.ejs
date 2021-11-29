@@ -11,7 +11,7 @@
         <div class = "docu">
             <h2>File</h2>
             
-        <center> <embed src="http://localhost:3000/ViewPage_Default/document/<%= doc.file_ID[0] %>" width = "100%" height ="300"></center>
+        <center> <embed src="http://localhost:3000/ViewPage_Default/document/<%= doc.file_ID[0] %>"></center>
             <!-- do a loop function so that the pictures will iterate from the system, do a carousel, and add arrow functions -->
 
         </div>
@@ -49,7 +49,14 @@
         <p class = "created_By"> Created By: </p>
         <p class = "date_Lmodified">Last Modified: </p>
         <p class = "modded_by">Modified By: </p>
+           
+        
+        <div>
 
+             attached file
+             <%= doc.attach_FileID%>
+
+        </div>
     </div>
     
 
