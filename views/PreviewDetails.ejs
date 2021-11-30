@@ -56,7 +56,24 @@
         <p class = "created_By"> Created By: <%= doc.created_By%> </p>
         <p class = "date_Lmodified">Last Modified: </p>
         <p class = "modded_by">Modified By: </p>
-
+           
+        
+        <div>
+            
+             attached file
+             <form action="/Document_Details/<%=doc._id%>" method="POST" enctype="multipart/form-data">
+                            <div style ="margin-right: 10px;">
+                            <center>
+                                <label for="snippet"></label>
+                                <div class="custom-file mb-3" style ="width: 60%; height: 35px;" >
+                                    <input type="file" name="attch_file" id="attch_file" class="custom-file-input">
+                                    <label for="attch_file" class="custom-file-label" style = "text-align:left; margin-left: 60px">Choose file</label>
+                                </div>
+                            </center>
+                             </div>
+                <center><button type="submit" value="Submit" class="btn btn-primary btn-block" style ="width: 30%;  height: 60px; margin-top: 30px;">Upload</button></center>
+            </form>
+        </div>
     </div>
     
 

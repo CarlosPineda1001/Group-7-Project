@@ -8,7 +8,6 @@ const {GridFsStorage} = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 
 const ViewPage_DefaultRoutes = require('./routes/ViewPage_DefaultRoutes');
-//const Document_DefaultRoutes = require('./routes/Document_DetailsRoutes');
 
 const Acc = require('./Models/account_Schema');
 const Doc = require('./Models/document_Schema');
@@ -43,7 +42,6 @@ console.log(decrypted);
 */
 const demo ={em: "marcelusandrei@gmail.com", 
                  pass: "gangplank"};
-
 
 let logged_in = false;
 let userFirstName = "defaultFirstName";
@@ -184,6 +182,7 @@ app.post('/', (req,res)=>{
 
 });
 
+//creation of new document in system
 app.post('/ViewPage_Default',upload.array('file',12), (req,res, next)=>{
     //file_ID array
     let fileIDs = [];
@@ -209,6 +208,7 @@ app.post('/ViewPage_Default',upload.array('file',12), (req,res, next)=>{
     });
 });
 
+//displaying document additional details
 app.get('/Document_Details/:id', (req, res) =>{
     const id = req.params.id;
 
@@ -218,6 +218,22 @@ app.get('/Document_Details/:id', (req, res) =>{
         });
 });
 
+//add attach files
+app.post('/Document_Details/:id', upload.single('attch_file'), (req, res) =>{
+    const id = req.params.id;
+    Doc.findByIdAndUpdate(id,{
+        attach_FileID: req.file.filename
+    },(err, result)=>{
+
+        if(err){
+            res.send(err)
+        }
+        else{
+            res.render('PreviewDetails', {doc: result})
+        }
+
+    })
+});
 
 app.post('/register', (req,res)=>{
             let email = req.body.New_Email;
@@ -288,9 +304,6 @@ app.post('/register', (req,res)=>{
 
 // route for ViewPage
 app.use('/ViewPage_Default', ViewPage_DefaultRoutes);
-
-// route for DocumentDetailPage
-//app.use('/Document_Details', Document_DefaultRoutes);
 
 //404 page
 app.use((req,res)=>{
