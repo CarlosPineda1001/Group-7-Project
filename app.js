@@ -70,6 +70,45 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
     })
     .catch((err) => console.log(err));
 
+
+const date = new Date(Date.now());
+
+const dateMonth = date.toString().slice(4,7);
+
+switch(dateMonth){
+    case 'Jan' : dateMonthNew = '01';
+    break;
+    case 'Feb' : dateMonthNew = '02';
+    break;
+    case 'Mar' : dateMonthNew = '03';
+    break;
+    case 'Apr' : dateMonthNew = '04';
+    break;
+    case 'May' : dateMonthNew = '05';
+    break;
+    case 'Jun' : dateMonthNew = '06';
+    break;
+    case 'Jul' : dateMonthNew = '07';
+    break;
+    case 'Aug' : dateMonthNew = '08';
+    break;
+    case 'Sep' : dateMonthNew = '09';
+    break;
+    case 'Oct' : dateMonthNew = '10';
+    break;
+    case 'Nov' : dateMonthNew = '11';
+    break;
+    case 'Dec' : dateMonthNew = '12';
+    break;
+}
+
+const dateDay = date.toString().slice(8,10);
+
+const dateYear = date.toString().slice(11,15);
+
+const dateNow = dateMonthNew + "/" + dateDay + "/" + dateYear;
+
+
 let datab = mongoose.connection;
 
 datab.once('open', () => {
@@ -221,8 +260,13 @@ app.get('/Document_Details/:id', (req, res) =>{
 //add attach files
 app.post('/Document_Details/:id', upload.single('attch_file'), (req, res) =>{
     const id = req.params.id;
+
+
+
     Doc.findByIdAndUpdate(id,{
-        attach_FileID: req.file.filename
+        attach_FileID: req.file.filename,
+        date_Lmodified: dateNow,
+        modified_By: userNow
     },(err, result)=>{
 
         if(err){

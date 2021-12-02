@@ -65,11 +65,11 @@ const documentSchema =  new Schema({
        // required: true
     },
     date_Lmodified:{
-        type: Date, 
+        type: String, default: dateNow
        // required: true
     },
-    modded_by:{
-        type: String,
+    modified_By:{
+        type: String, 
         //required: true
     },
     created_By:{
