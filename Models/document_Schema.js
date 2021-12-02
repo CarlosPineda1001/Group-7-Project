@@ -5,9 +5,7 @@ const Schema = mongoose.Schema;
 
 const documentSchema =  new Schema({
     file_ID:[String],
-    attach_FileID:{
-        type: String,
-    },
+    attach_FileID:[String],
     docu_Group:{
         type: String,
         // required: true
