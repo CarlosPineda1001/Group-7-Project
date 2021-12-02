@@ -8,7 +8,6 @@ const {GridFsStorage} = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 
 const ViewPage_DefaultRoutes = require('./routes/ViewPage_DefaultRoutes');
-//const Document_DefaultRoutes = require('./routes/Document_DetailsRoutes');
 
 const Acc = require('./Models/account_Schema');
 const Doc = require('./Models/document_Schema');
@@ -44,7 +43,6 @@ console.log(decrypted);
 const demo ={em: "marcelusandrei@gmail.com", 
                  pass: "gangplank"};
 
-
 let logged_in = false;
 let userFirstName = "defaultFirstName";
 let userLastName = "defaultLastName";
@@ -66,11 +64,50 @@ app.use(methodOverride('_method'));
 const dbURI = 'mongodb+srv://Carlos:XpaZ@mongouploads.zxnhp.mongodb.net/Document_Database?retryWrites=true&w=majority';
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => {
-        app.listen(3000, () =>{
+        app.listen(process.env.PORT || 5000, '0.0.0.0', () =>{
             console.log('Server started');
         }); 
     })
     .catch((err) => console.log(err));
+
+
+const date = new Date(Date.now());
+
+const dateMonth = date.toString().slice(4,7);
+
+switch(dateMonth){
+    case 'Jan' : dateMonthNew = '01';
+    break;
+    case 'Feb' : dateMonthNew = '02';
+    break;
+    case 'Mar' : dateMonthNew = '03';
+    break;
+    case 'Apr' : dateMonthNew = '04';
+    break;
+    case 'May' : dateMonthNew = '05';
+    break;
+    case 'Jun' : dateMonthNew = '06';
+    break;
+    case 'Jul' : dateMonthNew = '07';
+    break;
+    case 'Aug' : dateMonthNew = '08';
+    break;
+    case 'Sep' : dateMonthNew = '09';
+    break;
+    case 'Oct' : dateMonthNew = '10';
+    break;
+    case 'Nov' : dateMonthNew = '11';
+    break;
+    case 'Dec' : dateMonthNew = '12';
+    break;
+}
+
+const dateDay = date.toString().slice(8,10);
+
+const dateYear = date.toString().slice(11,15);
+
+const dateNow = dateMonthNew + "/" + dateDay + "/" + dateYear;
+
 
 let datab = mongoose.connection;
 
@@ -223,22 +260,22 @@ app.get('/Document_Details/:id', (req, res) =>{
 //add attach files
 app.post('/Document_Details/:id', upload.single('attch_file'), (req, res) =>{
     const id = req.params.id;
-    Doc.findByIdAndUpdate(id,{
-        attach_FileID: req.file.filename
-    },(err, result)=>{
 
+    Doc.findByIdAndUpdate(id,{
+        date_Lmodified: dateNow,
+        modified_By: userNow,
+        $push: {file_ID: req.file.filename}
+        
+    },(err, result)=>{
         if(err){
             res.send(err)
         }
         else{
-            res.render('PreviewDetails', {doc: result})
+            res.redirect('back');
         }
 
     })
 });
-
-
-
 
 app.post('/register', (req,res)=>{
             let email = req.body.New_Email;
@@ -309,9 +346,6 @@ app.post('/register', (req,res)=>{
 
 // route for ViewPage
 app.use('/ViewPage_Default', ViewPage_DefaultRoutes);
-
-// route for DocumentDetailPage
-//app.use('/Document_Details', Document_DefaultRoutes);
 
 //404 page
 app.use((req,res)=>{
