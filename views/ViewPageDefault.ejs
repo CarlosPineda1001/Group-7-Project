@@ -21,7 +21,8 @@
           <option value="">
           <option value="">
         </datalist>
-        <input type="search" name = "search" id = "search"  placeholder = "search" class = "search">
+        
+        <input type="text" id="myInput" onkeyup="searchable()" placeholder="Search for Document Group">
 </div>
 
 
@@ -30,23 +31,136 @@
 <div class = "Files">
 
   <div class = 'Doc content' >
-    <h2>All Docs <span style = 'float:right; padding-right: 20px'>Upload Date</span> <span style = 'float:right;padding-right: 20px'>Expiration</span></h2>
-    <div>
 
-      
-      <% if(docs.length > 0) { %>
-          <% docs.forEach(doc => { %>
-              <a href = "/Document_Details/<%= doc._id%>">
-                  <h3 class ="docu_Group" style = 'background-color: rgb(205,197,197); display: block;'><%= doc.docu_Group %>
-                    <span style='float:right;padding-right: 20px'><%= tempDateIssued %></span> <span style='float:right;padding-right: 20px'><%= tempExpirationDate %></span> </h3>
-              </a>
-          <% }) %>
-      <% } else { %>
-          <p>There are no documents to display... </p>
-      
-      <% } %>
-    </div>
-</div>
+
+    <div class = 'doc_content_head' style="width:100%">
+
+<button id = "sortName" onclick="sortListDir();". style="text-align:left; width:40%; background:yellow; margin-left:110px; font-size:30px; font-weight: bold;">Document Groups</button>
+    <div style="float:right; width:20; background:red; margin-right:125px; font-size:30px; font-weight: bold; ">Upload Date</div>
+    <div style="float:right; width:20; background:green; margin-right:10px; font-size:30px; font-weight: bold; ">Upload Date</div>
+    
+  </div>
+    
+  
+<ul id="id01" style="list-style-type: none;">
+  <div  style= "padding: 60px;" >      
+    <% if(docs.length > 0) { %>
+        <% docs.forEach(doc => { %>
+          <li>
+           <div style="display:none;"><%= doc.docu_Group %></div> 
+            <a id = "items" href = "/Document_Details/<%= doc._id%>">
+                <h3  class ="docu_Group" style = 'background-color: rgb(233, 233, 233); display: block; width:95%; margin:auto; padding:10px; margin-bottom:10px; color:black;'><%= doc.docu_Group %>
+                  <span1 style='float:right;padding-right: 20px'><%= tempDateIssued %></span1> <span2 style='float:right;padding-right: 20px'><%= tempExpirationDate %></span2> </h3>
+            </a>
+          </li>
+        <% }) %>
+    <% } else { %>
+        <p>There are no documents to display... </p>
+    
+    <% } %>
+</ul>
+
+
+
+
+<script>
+function sortListDir() {
+  var list, i, switching, b, shouldSwitch, dir, switchcount = 0;
+  list = document.getElementById("id01");
+  switching = true;
+  dir = "asc";
+  while (switching) {
+    switching = false;
+    b = list.getElementsByTagName("LI");
+    for (i = 0; i < (b.length - 1); i++) {
+      shouldSwitch = false;
+      if (dir == "asc") {
+        if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (b[i].innerHTML.toLowerCase() < b[i + 1].innerHTML.toLowerCase()) {
+          shouldSwitch= true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      b[i].parentNode.insertBefore(b[i + 1], b[i]);
+      switching = true;
+      switchcount ++;
+    } else {
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+/*
+
+function sortList2() {
+  var list, i, switching, b, shouldSwitch;
+  list = document.getElementById("id01");
+  switching = true;
+  /* Make a loop that will continue until
+  no switching has been done: 
+  while (switching) {
+    // start by saying: no switching is done:
+    switching = false;
+    b = list.getElementsByTagName("span2");
+    // Loop through all list-items:
+    for (i = 0; i < (b.length - 1); i++) {
+      // start by saying there should be no switching:
+      shouldSwitch = false;
+      /* check if the next item should
+      switch place with the current item: */
+      /*
+      if (Number(b[i].innerHTML) > Number(b[i + 1].innerHTML)) {*/
+        /* if next item is numerically
+        lower than current item, mark as a switch
+        and break the loop: 
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /* If a switch has been marked, make the switch
+      and mark the switch as done: 
+      b[i].parentNode.insertBefore(b[i + 1], b[i]);
+      switching = true;
+    }
+  }
+}
+*/
+
+
+
+
+/*---------------------Search Function-----------------------------*/
+
+function searchable() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("id01");
+  li = ul.getElementsByTagName('li');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("a")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+
+</script>
 
 
 

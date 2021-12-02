@@ -7,13 +7,17 @@
 
     <%- include('./partials/nav.ejs') %>
 
-    <div class = 'doc_Content'>
-        <div class = "docu">
-            <h2>File</h2>
-            
-        <center> <embed src="http://localhost:5000/ViewPage_Default/document/<%= doc.file_ID[0] %>" width = "100%" height ="300"></center>
-            <!-- do a loop function so that the pictures will iterate from the system, do a carousel, and add arrow functions -->
 
+    <div class = 'doc_Content' style="width: 75%;padding-bottom: 600px; ">
+
+    
+
+        <div class = "docu" style="width: 100%; height:100%;margin: 0 auto; text-align:center; " >
+            <h2>File</h2>
+
+        <center> <embed src="http://localhost:5000/ViewPage_Default/document/<%= doc.file_ID[0] %>" width = "100%" height ="500" ></center>
+            <!-- do a loop function so that the pictures will iterate from the system, do a carousel, and add arrow functions -->
+        
         <!-- <center> <embed src="https://group-7-project-appdev.herokuapp.com/ViewPage_Default/document/<%= doc.file_ID[0] %>" width = "100%" height ="300"></center>
             do a loop function so that the pictures will iterate from the system, do a carousel, and add arrow functions -->
 
@@ -21,14 +25,29 @@
             <% const tempDateIssued = '08/25/2021' %>
 
         </div>
+    </div>
+
+
+
+    <div style = "background-color:rgb(226, 226, 226); width:95%; margin:auto; height: 100%;" >
+  <div style= "background-color: grey; width:100% ;margin: auto; padding-inline: 10px;">
+    <p style =" color:black; font-size: 40px;">Document Details:</p>  
+    </div>
+    
+
+
+
+<div class = "container" >
+    <div class = "row"  >
+        <div class = "col-sm-6" >
         <div>
             <label for="doc_Group">Document Group:</label>
-                <input type="text" id="docu_Group" name="docu_Group" value= "<%= doc.docu_Group %>">
+                <input type="text" id="docu_Group" name="docu_Group" value= "<%= doc.docu_Group %>" style ="width: 60%; height: 35px; margin-top:10px; margin-left: 10px;">
         </div>
 
         <div>
             <p class = "doc_Type">Document Type:         
-                <select id="list">
+                <select id="list" style ="width: 60%; height: 35px; margin-top:10px;  margin-left: 20px;">
                     <option value="placeholder"><%= doc.docu_Type %></option>
                     <option value="Permit">Permit</option>
                     <option value="Invoice">Invoice</option>
@@ -39,43 +58,57 @@
 
         <div>
             <label for="doc_Group">Date Issued:</label>
-                <input type="text" id="date_Issued" name="date_Issued" value= "<%= tempDateIssued %>">
+                <input type="text" id="date_Issued" name="date_Issued" value= "<%= tempDateIssued %>" style ="width: 60%; height: 35px; margin-top:10px; margin-left: 49px;">
         </div>
 
         <div>
             <label for="doc_Group">Expiration Date:</label>
-                <input type="text" id="doc_group" name="doc_group" value= "<%= tempExpirationDate %>">
+                <input type="text" id="doc_group" name="doc_group" value= "<%= tempExpirationDate %>" style ="width: 60%; height: 35px; margin-top:10px; margin-left: 23px;">
         </div>
 
         <div>
             <label for="doc_Group">Prerequisite Files:</label>
-                <input type="text" id="#" name="#" value= "">
+                <input type="text" id="#" name="#" value= "" style ="width: 60%; height: 35px; margin-top:10px; margin-left: 10px;">
         </div>
 
+        </div>
+
+        
+        <div class = "col-sm-6">
         <p class = "date_Created">Data Created:<%= doc.date_Created%> </p>
         <p class = "created_By"> Created By: <%= doc.created_By%> </p>
         <p class = "date_Lmodified">Last Modified: </p>
         <p class = "modded_by">Modified By: </p>
-           
+        </div>
+
+
+        
+
+
+        <div class = "w-100">
+            <div class = "col">
         
         <div>
+            <hr style= "border-top: 10px solid #8c8b8b; width: 100%; margin-top:50px;"></hr>
             
-             attached file
+             <h1>Attached File:</h1>
+
              <form action="/Document_Details/<%=doc._id%>" method="POST" enctype="multipart/form-data">
                             <div style ="margin-right: 10px;">
-                            <center>
+                            <button type="submit" value="Submit" class="btn btn-primary btn-block" style ="width: 10%; float:right; margin: 10px; background-color: rgb(121, 187, 21); border-color:rgb(121, 187, 21);">Add</button>
                                 <label for="snippet"></label>
-                                <div class="custom-file mb-3" style ="width: 60%; height: 35px;" >
+                                <div class="custom-file mb-3" style ="width: 60%; height: 35px; float:right;" >
                                     <input type="file" name="attch_file" id="attch_file" class="custom-file-input">
-                                    <label for="attch_file" class="custom-file-label" style = "text-align:left; margin-left: 60px">Choose file</label>
+                                    <label for="attch_file" class="custom-file-label" style = "text-align:left; margin-left: 60px ">Choose file</label>
                                 </div>
-                            </center>
+                            
                              </div>
-                <center><button type="submit" value="Submit" class="btn btn-primary btn-block" style ="width: 30%;  height: 60px; margin-top: 30px;">Upload</button></center>
-            </form>
+                
+             </form>
+          </div>
         </div>
     </div>
-    
-
+        
+    </div>
 </body>
 </html>
