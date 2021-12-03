@@ -39,13 +39,18 @@ var decrypted = decipher.update(encrypted,'hex', 'utf8');
 decrypted = decrypted + decipher.final('utf8');
 
 console.log(decrypted);
+
 */
+
 const demo ={em: "marcelusandrei@gmail.com", 
                  pass: "gangplank"};
+
+                 
 
 let logged_in = false;
 let userFirstName = "defaultFirstName";
 let userLastName = "defaultLastName";
+let email = "defaultEmail";
 let userID = "defaultID";
 
 let demo2 = [];
@@ -163,11 +168,19 @@ app.get('/', (req, res) =>{
   
 });
 
+app.get('/Loginpage', (req, res) =>{
+
+   logged_in = false;
+   res.redirect('/');
+  
+});
+
+
 app.get('/account_details', (req, res) => {
 
     if(logged_in){
 
-        res.render('AccountDetails');
+        res.render('AccountDetails',{firstName: userFirstName, lastName: userLastName, email: email} );//
     }
     else{
         res.redirect('/');
@@ -188,7 +201,7 @@ app.get('/NewDocs', (req, res) =>{
 });
 
 app.post('/', (req,res)=>{
-    let email = req.body.Email;
+    email = req.body.Email;
     let pass = req.body.Password;
 
     const cipher1 = crypto.createCipher('aes192', 'a password');
@@ -208,13 +221,19 @@ app.post('/', (req,res)=>{
                     console.log("nakalogin kana boy");
                     console.log(user);
                     userNow = user.l_Name + ", " + user.f_Name;
+                    userFirstName = user.f_Name;
+                    userLastName = user.l_Name;
+
+                   //console.log(userFirstName + " " + userLastName);
                    res.redirect('/');
                    // if(pass == )
                    logged_in = true;
                 }else{
                     
-                }
+                    console.log("Wrong Password");
+                      }
             })
+            .catch((err) => console.log("Invalid Credentials"));
 
     console.log(email);
     console.log(pass);
