@@ -3,7 +3,7 @@ const Doc = require('../Models/document_Schema');
 const viewPage_index = (req,res)=>{
     Doc.find().sort({ createdAt: -1})
         .then((result) =>{
-            res.render('ViewPageDefault', {docs: result});
+            res.render('ViewPageDefault', {docs: result, title: "View Files"});
         })
         .catch((err)=>{
             console.log(err);

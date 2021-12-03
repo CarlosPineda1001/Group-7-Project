@@ -148,7 +148,7 @@ const upload = multer({ storage })
 app.get('/register', (req, res) =>{
     if(logged_in){
 
-        res.render('Register');
+        res.render('Register', {title: "Registration"});
     }
     else{
         res.redirect('/');
@@ -180,7 +180,7 @@ app.get('/account_details', (req, res) => {
 
     if(logged_in){
 
-        res.render('AccountDetails',{firstName: userFirstName, lastName: userLastName, email: email} );//
+        res.render('AccountDetails',{firstName: userFirstName, lastName: userLastName, email: email, title: "Account Details"} );//
     }
     else{
         res.redirect('/');
@@ -192,7 +192,7 @@ app.get('/NewDocs', (req, res) =>{
    
     if(logged_in){
 
-        res.render('NewDocsPage');
+        res.render('NewDocsPage', {title: "New Document"});
     }
     else{
         res.redirect('/');
@@ -272,7 +272,7 @@ app.get('/Document_Details/:id', (req, res) =>{
 
     Doc.findById(id)
         .then(result => {
-            res.render('PreviewDetails', {doc: result});
+            res.render('PreviewDetails', {doc: result, title: "Document Details"});
         });
 });
 
