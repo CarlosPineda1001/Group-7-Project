@@ -4,6 +4,9 @@
     <%- include ('./partials/head.ejs') %>
    <!--- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous"> --->
+
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <title>New Document Page</title>
 </head>
 <body>
@@ -54,16 +57,32 @@
                         <input type="file" name="file" id="file" class="custom-file-input" onchange="loadFile(event)" multiple >
                         <label for="file" class="custom-file-label" style = "text-align:left; margin-left: 60px">Choose file</label>
                     </div>
-                </center>
-                 </div>
-
-
-                    
                 
+                    <script type="text/javascript">
+
+                        $('.custom-file input').change(function (e) {
+                            var files = [];
+                            for (var i = 0; i < $(this)[0].files.length; i++) {
+                                files.push($(this)[0].files[i].name);
+                            }
+                            $(this).next('.custom-file-label').html(files.join(', '));
+                        });
+                    
+                    </script>
+                
+
+                
+            </center>
+                 </div>
             </div>
         </div>
     </div>
     <center><button type="submit" value="Submit" class="btn btn-primary btn-block" style ="width: 30%;  height: 60px; margin-top: 30px;">Upload</button></center>
 </form>
+
+
+
+
+
 </body>
 </html>
