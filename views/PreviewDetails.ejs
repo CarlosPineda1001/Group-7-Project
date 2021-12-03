@@ -80,7 +80,7 @@
         <p class = "date_Lmodified">Last Modified: <%= doc.date_Lmodified%> </p>
         <p class = "modified_By">Modified By: <%= doc.modified_By%> </p>
         </div>
-
+                
 
         
 
@@ -92,6 +92,16 @@
             <hr style= "border-top: 10px solid #8c8b8b; width: 100%; margin-top:50px;"></hr>
             
              <h1>Attached File:</h1>
+            <div>
+                <% if(doc.file_ID.length > 0 ){ %>
+                    <% doc.file_ID.forEach((element, index) => { %>
+                  
+                        <input type="text" id="file_ID" name="file_ID" value= "<%= doc.file_ID[index] %>" style ="width: 60%; height: 35px; margin-top:10px; margin-left: 49px;">
+                    
+                    <% }) %>
+                <% } %> 
+            </div>
+
 
              <form action="/Document_Details/<%=doc._id%>" method="POST" enctype="multipart/form-data">
                             <div style ="margin-right: 10px;">

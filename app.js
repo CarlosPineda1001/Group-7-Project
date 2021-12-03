@@ -280,19 +280,17 @@ app.get('/Document_Details/:id', (req, res) =>{
 app.post('/Document_Details/:id', upload.single('attch_file'), (req, res) =>{
     const id = req.params.id;
 
-
-
     Doc.findByIdAndUpdate(id,{
-        attach_FileID: req.file.filename,
         date_Lmodified: dateNow,
-        modified_By: userNow
+        modified_By: userNow,
+        $push: {file_ID: req.file.filename}
+        
     },(err, result)=>{
-
         if(err){
             res.send(err)
         }
         else{
-            res.render('PreviewDetails', {doc: result})
+            res.redirect('back');
         }
 
     })

@@ -41,9 +41,6 @@ const dateNow = dateMonthNew + "/" + dateDay + "/" + dateYear;
 
 const documentSchema =  new Schema({
     file_ID:[String],
-    attach_FileID:{
-        type: String,
-    },
     docu_Group:{
         type: String,
         // required: true
