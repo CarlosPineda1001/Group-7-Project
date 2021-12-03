@@ -138,6 +138,28 @@ const storage = new GridFsStorage({
 
 const upload = multer({ storage })
 
+
+//profile img storage engine
+const imgStorage = new GridFsStorage({
+    url: dbURI,
+    file: (req, file) => {
+      return new Promise((resolve, reject) => {
+        crypto.randomBytes(16, (err, buf) => {
+          if (err) {
+            return reject(err);
+          }
+          const filename = buf.toString('hex');
+          const fileInfo = {
+            filename: filename,
+            bucketName: 'accs'
+          };
+          resolve(fileInfo);
+        });
+      });
+    }
+  });
+
+  const imgUpload = multer({ imgStorage })
 //lsten to what page
 
 app.get('/register', (req, res) =>{
@@ -208,6 +230,8 @@ app.post('/', (req,res)=>{
                     console.log("nakalogin kana boy");
                     console.log(user);
                     userNow = user.l_Name + ", " + user.f_Name;
+                    userNowID = user._id
+                    console.log(userNowID);
                    res.redirect('/');
                    // if(pass == )
                    logged_in = true;
