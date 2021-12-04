@@ -1,9 +1,9 @@
 
 <div class="topnav" id="myTopnav" >
-  <a href="/NewDocs">New Document</a>
-  <a href="/ViewPage_Default">Files</a>
+  <a href="/NewDocs" id="newdocs">New Document</a>
+  <a href="/ViewPage_Default" id="files">Files</a>
   <div class="dropdown"style >
-    <button class="dropbtn" >Account
+    <button class="dropbtn btn" id= "account">Account
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content" >
@@ -28,18 +28,19 @@
       x.className = "topnav";
     }
   }
-
-const currentLocation = location.href;
-const menuItem = document.querySelectorAll('a');
-const menuLength = menuItem.length;
-  for(let i = 0; menuLength; i++){
-    if(menuItem[i].href === currentLocation){
-     menuItem[i].className = "active";
-    }
-  }
-
 </script>
 
 
 
-
+<script>
+if (document.URL.includes("/NewDocs") ) {
+  document.getElementById("newdocs").style.color = "rgb(57, 201, 206)";
+}if (document.URL.includes("/ViewPage_Default")){
+  document.getElementById("files").style.color = "rgb(57, 201, 206)";
+}if (document.URL.includes("account")){
+  document.getElementById("account").style.color = "rgb(57, 201, 206)";
+}else{
+  console.log("no page active")
+}
+  
+  </script>
