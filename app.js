@@ -518,7 +518,8 @@ app.post('/register', (req,res)=>{
                             }
             
                       }
-                      res.redirect('/register');  })
+                      //res.redirect('/register');//
+                      })
 });
 
 // route for ViewPage

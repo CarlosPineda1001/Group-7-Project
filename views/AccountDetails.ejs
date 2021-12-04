@@ -9,36 +9,38 @@
 
   <%- include('./partials/nav.ejs') %>
 <div>
-  
+  <div >
   <script>
     var loadFile = function(event) {
         var image = document.getElementById('profilePic');
         image.src = URL.createObjectURL(event.target.files[0]);
     };
   </script>
-  
-  <h2>PHOTO: <img id= "profilePic">
-      
-      <span class="custom-file mb-3" style ="width: 20%; height: 35px;" >
-        
+  </div>
+  <h2>PHOTO:    
+    <img id= "profilePic" style="margin-left: 100px; border-radius:50%; border: 1px solid #555; " width = "200px" height ="200px" ></img>
+    
+    
+    <span class="custom-file mb-3" style ="width: 20%; height: 35px;" >
         <h6>
           <input type="file" name="profilePic" id="profilePic" class="file" onchange="loadFile(event)">
           <label for="profilePic" class="file" style = "text-align:left; margin-left: 60px"></label>
         </h6>
-      
       </span>
+      
+
   </h2>
 </div>
 
 
-<hr></hr>
+<hr style=" border-top: 3px double #a3a3a3;"></hr>
 
 <div>
   <h2>FIRST NAME: <input name="FirstName" id = "fname" type="text" value = "<%= firstName %>" disabled = "disabled"/> </h2>
 </div>
 
 
-<hr></hr>
+<hr style=" border-top: 3px double #a3a3a3;"></hr>
 <div>
 
   <h2>LAST NAME: <input name="LastName" id = "lname" value = "<%= lastName %>" type="text" disabled = "disabled"/></h2>
@@ -46,7 +48,7 @@
 </div>
 
 
-<hr></hr>
+<hr style=" border-top: 3px double #a3a3a3;"></hr>
 
 <div>
   <h2>EMAIL: <input name="Email" id = "email" value = "<%= email %>" type="text" disabled = "disabled" /></h2>
