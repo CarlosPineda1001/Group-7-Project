@@ -312,7 +312,7 @@ app.get('/Document_Details/:id', (req, res) =>{
 //add attach files
 app.post('/Document_Details/:id', upload.single('attch_file'), (req, res) =>{
     const id = req.params.id;
-
+    console.log('here')
     Doc.findByIdAndUpdate(id,{
         date_Lmodified: dateNow,
         modified_By: userNow,
@@ -331,6 +331,27 @@ app.post('/Document_Details/:id', upload.single('attch_file'), (req, res) =>{
 
     })
 });
+//details
+app.patch('/Document_Details/:id', (req, res) =>{
+    const id = req.params.id;
+    const file = req.body.file_name;
+
+    console.log(file);
+    Doc.findByIdAndUpdate(id,{
+        
+        $pull: {file_Name: file}
+        
+    },(err, result)=>{
+        if(err){
+            res.send(err)
+        }
+        else{
+            res.redirect('back');
+        }
+
+    })
+});
+
 
 app.post('/register', (req,res)=>{
             let email = req.body.New_Email;
