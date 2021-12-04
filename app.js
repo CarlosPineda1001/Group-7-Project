@@ -170,8 +170,7 @@ const imgStorage = new GridFsStorage({
 
   const imgUpload = multer({ imgStorage })
 //lsten to what page
-
-app.get('/register', (req, res) =>{
+app.get('/register',requireAdmin, (req, res) =>{
     if(logged_in){
 
         res.render('Register');
@@ -179,8 +178,18 @@ app.get('/register', (req, res) =>{
     else{
         res.redirect('/');
     }
-    
+
 });
+
+function requireAdmin (req, res, next) {
+    const user_Role = userRole;
+    console.log(user_Role);
+      if (user_Role == true) {
+        next();
+      } else {
+        res.redirect('/');
+      }
+  };
 
 app.get('/', (req, res) =>{
 
@@ -249,6 +258,7 @@ app.post('/', (req,res)=>{
                     userNow = user.l_Name + ", " + user.f_Name;
                     userFirstName = user.f_Name;
                     userLastName = user.l_Name;
+                    userRole = user.user_Role;
 
                    //console.log(userFirstName + " " + userLastName);
                    res.redirect('/');
@@ -377,6 +387,7 @@ app.post('/register', (req,res)=>{
             l_Name: lastName,
             user_Email: encryptedEmail,
             user_Password: encryptedPass,
+            user_Role: false
             
         });
 
