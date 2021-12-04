@@ -27,8 +27,10 @@ const accountSchema =  new Schema({
     },
     user_ProfileImg_ID:{
         type: String,
-      //  required: true
     },
+    user_Role:{
+        type:Boolean
+    }
 
 }, {
     timestamps: true,

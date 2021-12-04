@@ -8,6 +8,9 @@
     </button>
     <div class="dropdown-content" >
       <a href="/account_details">Account Details</a>
+      <% if(userRole == true) { %>
+        <a href="/register">Registration</a>
+        <% } %>
       <a href="/Loginpage">Sign Out</a>
     </div>
   </div>
