@@ -134,11 +134,11 @@ const storage = new GridFsStorage({
     url: dbURI,
     file: (req, file) => {
       return new Promise((resolve, reject) => {
-        crypto.randomBytes(16, (err, buf) => {
+        crypto.randomBytes(5, (err, buf) => {
           if (err) {
             return reject(err);
           }
-          const filename = buf.toString('hex');
+          const filename = "("+ buf.toString('hex')+ ")" + file.originalname ;
           const alias = file.originalname;
           const fileInfo = {
             filename: filename, 
@@ -393,7 +393,6 @@ app.post('/Document_Details/:id', upload.single('attch_file'), (req, res, next) 
     const file = req.body.file_name;
 
     
-    console.log('here');
 
     if(file == undefined){
         Doc.findByIdAndUpdate(id,{
@@ -413,44 +412,30 @@ app.post('/Document_Details/:id', upload.single('attch_file'), (req, res, next) 
             }
     
         })
-    }else{
-        console.log(file);
-        Doc.findByIdAndUpdate(id,{
+    }
+    //delete attach file
+    else{
+
+        Doc.findByIdAndUpdate(id,
+        {
+            $pull: {
+                file_ID: file
+             }
+        },
+
+
         
-        $pull: {file_Name: file}
-        
+        (err, result)=>{
+            if(err){
+                res.send(err)
+            }
+            else{
+                res.redirect('back');
+            }
+    
         })
     }
 });
-//details
-// axios.put('/Document_Details/:id',)
-//     .then((res)=>{
-//         console.log(req.params.id)
-//     })
-//     .catch(err => {
-//         console.log(err);
-//     });
-
-// app.post('/Document_Details/61ab03401db0f116d88c2c36', (req, res) =>{
-//     const id = req.params.id;
-//     const file = req.body.file_name;
-
-//     console.log("Hello");
-//     Doc.findByIdAndUpdate(id,{
-        
-//         $pull: {file_Name: file}
-        
-//     },(err, result)=>{
-//         if(err){
-//             res.send(err)
-//         }
-//         else{
-            
-//             res.redirect('back');
-//         }
-
-//     })
-// });
 
 
 app.post('/register', (req,res)=>{
