@@ -111,7 +111,7 @@
 
         
         <div class = "col-sm-6">
-        <p class = "date_Created">Data Created:<%= doc.date_Created%> </p>
+        <p class = "date_Created">Date Created: <%= doc.date_Created%> </p>
         <p class = "created_By"> Created By: <%= doc.created_By%> </p>
         <p class = "date_Lmodified">Last Modified: <%= doc.date_Lmodified%> </p>
         <p class = "modified_By">Modified By: <%= doc.modified_By%> </p>
@@ -133,8 +133,8 @@
                     <% if(doc.file_ID.length > 0 ){ %>
                         <% doc.file_ID.forEach((element, index) => { %>
                         <form action="/Document_Details/<%=doc._id%>" method="POST" enctype="multipart/form-data">
-                        <input type="text" id="file_name" name="file_name" value= "<%= doc.file_Name[index] %>" style ="width: 60%; height: 35px; margin-top:10px; margin-left: 49px;">
-                        
+                        <input type="text" id="<%= doc.file_ID[index]%>" name="file_name" value= "<%= doc.file_ID[index]%>" style ="width: 60%; height: 35px; margin-top:10px; margin-left: 49px;">
+                       
                             <button for="file_name" type="submit" value="Delete" class="delbtn" style ="width: 5%; height:5%; text-align: center;">Delete</button>
                         </form>
                         <% }) %>

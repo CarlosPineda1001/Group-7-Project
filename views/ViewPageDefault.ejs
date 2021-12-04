@@ -57,7 +57,7 @@
             <a id = "items" href = "/Document_Details/<%= doc._id%>">
               <div1 style="display:none;"><%= doc.docu_Type %> </div1>
                 <h3  class ="docu_Group" style = 'background-color: rgb(233, 233, 233); display: block; width:95%; margin:auto; padding:10px; margin-bottom:10px; color:black;'><%= doc.docu_Group %>
-                  <span1 style='float:right;padding-right: 20px'><%= tempDateIssued %></span1> <span2 style='float:right;padding-right: 20px'><%= tempExpirationDate %></span2> </h3>
+                  <span1 style='float:right;padding-right: 20px'><%= doc.date_Created%></span1> <span2 style='float:right;padding-right: 20px'><%= tempExpirationDate %></span2> </h3>
             </a>
           </li>
         <% }) %>
