@@ -12,12 +12,13 @@
 <div>
 <div Style = "padding:50px;">
   <p class = "doc_Type">Document Type:         
-    <select id ="docu_Type" name="docu_Type" style ="width: 30%; height: 35px; margin-top:10px;">
-        <option value="placeholder"></option>
+    <select id ="docu_Type" name="docu_Type" style ="width: 30%; height: 35px; margin-top:10px;" onchange="searchable2()">
+        <option value=""></option>
         <option value="Permit">Permit</option>
         <option value="Invoice">Invoice</option>
         <option value="Receipt">Receipt</option>
         <option value="Test1">Test1</option>
+        <option value="Test2">Test2</option>
     </select>
         
         <input type="text" id="myInput" onkeyup="searchable()" placeholder="Search for Document Group"></p> 
@@ -33,9 +34,14 @@
 
     <div class = 'doc_content_head' style="width:100%">
 
-<div id = "sortName" onclick="sortListDir();". style="float:left; width:30%; color: rgb(57, 201, 206); border-color:white; margin-left:150px; font-size:30px;">Document Groups <i class="fa fa-caret-down"></i></div>
-    <div style="float:right; width:20; color: rgb(57, 201, 206); margin-right:125px; font-size:30px; ">Upload Date</div>
-    <div style="float:right; width:20; color: rgb(57, 201, 206); margin-right:20px; font-size:30px; ">Expiration</div>
+<div id = "sortName" onclick="sortListDir(); toggleupdown1();"  style="float:left; width:30%; color: rgb(57, 201, 206); border-color:white; margin-left:150px; font-size:30px;">Document Groups 
+  
+
+  <i id = "caret1"class="nothing"></i>
+
+</div>
+    <div style="float:right; width:20; color: rgb(57, 201, 206); margin-right:125px; font-size:30px; " onclick="toggleupdown2();">Upload Date<i id = "caret2"class="nothing"></i></div>
+    <div style="float:right; width:20; color: rgb(57, 201, 206); margin-right:20px; font-size:30px; " onclick="toggleupdown3();">Expiration<i id = "caret3"class="nothing"></i></div>
     
     </div>
   
@@ -49,7 +55,7 @@
           <li>
            <div style="display:none;"><%= doc.docu_Group %></div> 
             <a id = "items" href = "/Document_Details/<%= doc._id%>">
-              <%= doc.docu_Type %> 
+              <div1 style="display:none;"><%= doc.docu_Type %> </div1>
                 <h3  class ="docu_Group" style = 'background-color: rgb(233, 233, 233); display: block; width:95%; margin:auto; padding:10px; margin-bottom:10px; color:black;'><%= doc.docu_Group %>
                   <span1 style='float:right;padding-right: 20px'><%= tempDateIssued %></span1> <span2 style='float:right;padding-right: 20px'><%= tempExpirationDate %></span2> </h3>
             </a>
@@ -122,8 +128,83 @@ function searchable() {
   }
 }
 
-</script>
 
+function searchable2() {
+  // Declare variables
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('docu_Type');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("id01");
+  li = ul.getElementsByTagName('li');
+
+  // Loop through all list items, and hide those who don't match the search query
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("div1")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+
+
+
+var x = true;
+var y = true;
+var z = true;
+
+
+  function toggleupdown1(){
+    
+        if(x == true){
+              document.getElementById("caret1").className = "caret-icon fa fa-caret-up";
+              document.getElementById("caret2").className = "nothing";
+              document.getElementById("caret3").className = "nothing";
+              x = false;
+            }else{
+              document.getElementById("caret1").className = "caret-icon fa fa-caret-down";
+              document.getElementById("caret2").className = "nothing";
+              document.getElementById("caret3").className = "nothing";
+              x = true;
+            }
+  }
+
+
+  function toggleupdown2(){
+    
+    if(y == true){
+          document.getElementById("caret1").className = "nothing";
+          document.getElementById("caret2").className = "caret-icon fa fa-caret-up";
+          document.getElementById("caret3").className = "nothing";
+          y = false;
+        }else{
+          document.getElementById("caret1").className = "nothing";
+          document.getElementById("caret2").className = "caret-icon fa fa-caret-down";
+          document.getElementById("caret3").className = "nothing";
+          y = true;
+        }
+}
+
+
+function toggleupdown3(){
+    
+    if(z == true){
+          document.getElementById("caret1").className = "nothing";
+          document.getElementById("caret2").className = "nothing";
+          document.getElementById("caret3").className = "caret-icon fa fa-caret-up";
+          z = false;
+        }else{
+          document.getElementById("caret1").className = "nothing";
+          document.getElementById("caret2").className = "nothing";
+          document.getElementById("caret3").className = "caret-icon fa fa-caret-down";
+          z = true;
+        }
+}
+
+
+</script>
 
 
 </div>
