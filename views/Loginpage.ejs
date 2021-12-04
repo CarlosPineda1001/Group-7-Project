@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Login Page</title>
-    <script src="js/script.js"></script>
+   <!--<script src="js/script.js"></script>--> 
 </head>
-<body onload = "getCookieData()">
+<body>
 
 
     <div>
@@ -21,33 +21,80 @@
         <div>
                 <div class="input-icons" style = "padding-top: 10px">
                     <i class="fa fa-envelope icon"></i>
-                    <input type="text" name = "Email" id = "Email"  placeholder = "Email" class = "input-field">
+                    <input type="text" name = "Email" id = "Email"  placeholder = "Email" class = "input-field" onkeydown="FxUserPress()">
                </div>
                 <div class="input-icons">
                     <i class="fa fa-lock icon"></i>
-                    <input type="password" name = "Password" id = "Pword"  placeholder = "Password" class = "input-field">
+                    <input type="password" name = "Password" id = "Pword"  placeholder = "Password" class = "input-field" onkeydown="FxUserPress()" >
                 </div>
         </div>
 
-<input type="checkbox" id="remember" name="remember_me" value="remember" onclick = "setcookie()">
+<input type="checkbox" id="remember" name="remember_me" value="remember" onclick = "Fxchkbox()">
 <label for ="remember" style = "font-size:13px;">Remember me</label><br>
         
-    <button class = "button" type = "submit">SIGN IN</button>
+    <button class = "button" type = "submit" >SIGN IN</button>
 
  <!--   <div class = "button" onclick="loginClick()">
         <a href = "ViewPageDefault" style = "color:inherit;text-decoration:none; "> SIGN IN</a>
         </div>-->
     </form>
 
-    <script type = "text/javascript">
+    <center>
+        <p><%= errorMessage %></p>
+    </center>
+    <script>
 
+        if(localStorage.remember_me == "true"){
+
+            document.forms[0].remember_me.checked = true
+            document.forms[0].Email.value = localStorage.email
+            document.forms[0].Password.value = localStorage.password
+            
+        }
+        else{
+            document.forms[0].remember_me.checked = false
+        }
+
+        function FxUserPress(){
+            if (document.forms[0].remember_me.checked == true){
+
+                localStorage.setItem("remember_me", "true");
+                localStorage.setItem("email", document.forms[0].Email.value);
+                localStorage.setItem("password", document.forms[0].Password.value);
+
+                }
+                else{
+
+                localStorage.setItem("remember_me", "false");
+                localStorage.setItem("email", "");
+                localStorage.setItem("password", "");
+                }
+                    }
+
+
+        function Fxchkbox(){
+            if (document.forms[0].remember_me.checked == true){
+
+                localStorage.setItem("remember_me", "true");
+                localStorage.setItem("email", document.forms[0].Email.value);
+                localStorage.setItem("password", document.forms[0].Password.value);
+                
+            }
+            else{
+
+                localStorage.setItem("remember_me", "false");
+                localStorage.setItem("email", "");
+                localStorage.setItem("password", "");
+            }
+        }
+         /*
         function setCookie(){
             var email = document.getElementById('Email').value;
             var pass = document.getElementById('Pword').value;
        
             document.cookie = "myuserName =" + email +";path = http://localhost/5000/";
             document.cookie = "mypw =" + pass+";path = http://localhost/5000/";
-       
+            
         
        
        
@@ -55,7 +102,7 @@
         }
 
         function getCookieData(){
-            //console.log(document.cookie)
+            
 
            var email = getCookie('myuserName');
             var pass = getCookie('mypw');
@@ -64,7 +111,21 @@
             document.getElementById('Pword').value = pass;
         }
 
-        
+        function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+       }*/
 
     </script>
 <!---<div class="text"><text Style = "font-size:15px;">

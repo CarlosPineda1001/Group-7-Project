@@ -6,6 +6,7 @@ const crypto = require('crypto');
 const multer = require('multer');
 const {GridFsStorage} = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
+const session = require('express-session');
 
 const ViewPage_DefaultRoutes = require('./routes/ViewPage_DefaultRoutes');
 
@@ -41,6 +42,10 @@ decrypted = decrypted + decipher.final('utf8');
 console.log(decrypted);
 
 */
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/Testing
 
 const demo ={em: "marcelusandrei@gmail.com", 
                  pass: "gangplank"};
@@ -52,6 +57,10 @@ let userFirstName = "defaultFirstName";
 let userLastName = "defaultLastName";
 let email = "defaultEmail";
 let userID = "defaultID";
+let password = "defaultPassword";
+let encryptedEmail = "defaultEncryptedEmail";
+let loginErrorMessage = " ";
+
 
 let demo2 = [];
 //register view engine
@@ -64,6 +73,8 @@ app.use(express.static('css'));
 app.use(express.urlencoded({extended: true})); //used for accepting form data
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
+app.use(session({secret:"12345ggggg", resave:false, saveUninitialized: true }));
+
 
 // connect to mongodb
 const dbURI = 'mongodb+srv://Carlos:XpaZ@mongouploads.zxnhp.mongodb.net/Document_Database?retryWrites=true&w=majority';
@@ -189,7 +200,7 @@ app.get('/', (req, res) =>{
         res.redirect('/ViewPage_Default');
     }
     else{
-        res.render('Loginpage');
+        res.render('Loginpage',{errorMessage: loginErrorMessage});
     }
   
 });
@@ -197,6 +208,7 @@ app.get('/', (req, res) =>{
 app.get('/Loginpage', (req, res) =>{
 
    logged_in = false;
+   loginErrorMessage= " ";
    res.redirect('/');
   
 });
@@ -214,6 +226,53 @@ app.get('/account_details', (req, res) => {
    
 });
 
+app.post('/account_details', (req, res) => {
+let oldPassword = req.body.oldPassword;
+let newPass1 = req.body.NewPassword1;
+let newPass2 = req.body.NewPassword2;
+
+            //ENCRYPT OLD PASS
+            const cipher2 = crypto.createCipher('aes192', 'a password');
+            var encryptedOldPass = cipher2.update(oldPassword, 'utf8', 'hex');
+            encryptedOldPass = encryptedOldPass + cipher2.final('hex');
+
+
+ if(encryptedOldPass == password){
+
+        if(newPass1 == newPass2){
+
+            
+            const cipher2 = crypto.createCipher('aes192', 'a password');
+            var encryptedPass = cipher2.update(newPass1, 'utf8', 'hex');
+            encryptedPass = encryptedPass + cipher2.final('hex');
+        
+            console.log(encryptedPass);
+        
+            
+           Acc.findOneAndUpdate({user_Email: encryptedEmail}, {user_Password: encryptedPass },{new:true}, (error,data)=>{
+               if(error){
+                   console.log(error);
+        
+               }else{
+                   console.log("password has been changed to: "+ data);
+                    res.redirect('/account_details');
+                }
+           })
+           
+        }else{
+            console.log("the passwords do not match.");
+           
+
+        }
+}else{
+
+    console.log("The password you have entered is incorrect.");
+  
+
+}
+
+});
+
 app.get('/NewDocs', (req, res) =>{
    
     if(logged_in){
@@ -229,9 +288,11 @@ app.get('/NewDocs', (req, res) =>{
 app.post('/', (req,res)=>{
     email = req.body.Email;
     let pass = req.body.Password;
+    
+
 
     const cipher1 = crypto.createCipher('aes192', 'a password');
-    var encryptedEmail = cipher1.update(email, 'utf8', 'hex');
+    encryptedEmail = cipher1.update(email, 'utf8', 'hex');
     encryptedEmail = encryptedEmail + cipher1.final('hex');
            
  
@@ -249,17 +310,24 @@ app.post('/', (req,res)=>{
                     userNow = user.l_Name + ", " + user.f_Name;
                     userFirstName = user.f_Name;
                     userLastName = user.l_Name;
-
+                    password = user.user_Password;
                    //console.log(userFirstName + " " + userLastName);
                    res.redirect('/');
                    // if(pass == )
                    logged_in = true;
+                   // req.session.user = user;
+                   //console.log("user: "+ req.session.user);
                 }else{
                     
                     console.log("Wrong Password");
-                      }
-            })
-            .catch((err) => console.log("Invalid Credentials"));
+                    loginErrorMessage = "The username or password you have entered is incorrect ";
+                     
+                    res.render('Loginpage',{errorMessage: loginErrorMessage} );
+                     }
+                }
+            )
+            .catch((err) => console.log("Invalid Credentials")
+                            );
 
     console.log(email);
     console.log(pass);
@@ -298,6 +366,7 @@ app.post('/ViewPage_Default',upload.array('file',12), (req,res, next)=>{
       console.log(err);
     });
 });
+
 
 //displaying document additional details
 app.get('/Document_Details/:id', (req, res) =>{
