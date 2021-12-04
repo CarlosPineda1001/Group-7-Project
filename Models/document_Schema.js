@@ -41,6 +41,7 @@ const dateNow = dateMonthNew + "/" + dateDay + "/" + dateYear;
 
 const documentSchema =  new Schema({
     file_ID:[String],
+    file_Name:[String],
     docu_Group:{
         type: String,
         // required: true

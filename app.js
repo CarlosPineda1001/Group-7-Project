@@ -131,10 +131,14 @@ const storage = new GridFsStorage({
             return reject(err);
           }
           const filename = buf.toString('hex');
+          const alias = file.originalname;
           const fileInfo = {
-            filename: filename,
+            filename: filename, 
+            metadata:  alias,
             bucketName: 'docs'
+           
           };
+
           resolve(fileInfo);
         });
       });
@@ -266,16 +270,23 @@ app.post('/', (req,res)=>{
 app.post('/ViewPage_Default',upload.array('file',12), (req,res, next)=>{
     //file_ID array
     let fileIDs = [];
+    let filenames = [];
     req.files.forEach((file, index)=>{
         
         fileIDs[index]=file.filename
          return fileIDs;
+     })
+    req.files.forEach((file, index)=>{
+        
+        filenames[index]=file.metadata
+         return filenames;
      })
     const doc = new Doc({
         
         docu_Group: req.body.docu_Group,
         docu_Type: req.body.docu_Type,
         file_ID: fileIDs,
+        file_Name: filenames,
         created_By: userNow
        
     });
@@ -305,7 +316,10 @@ app.post('/Document_Details/:id', upload.single('attch_file'), (req, res) =>{
     Doc.findByIdAndUpdate(id,{
         date_Lmodified: dateNow,
         modified_By: userNow,
-        $push: {file_ID: req.file.filename}
+        $push: {
+            file_ID: req.file.filename,
+            file_Name: req.file.metadata
+        }
         
     },(err, result)=>{
         if(err){
