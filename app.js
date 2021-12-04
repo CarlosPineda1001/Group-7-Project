@@ -42,10 +42,6 @@ decrypted = decrypted + decipher.final('utf8');
 console.log(decrypted);
 
 */
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/Testing
 
 const demo ={em: "marcelusandrei@gmail.com", 
                  pass: "gangplank"};
