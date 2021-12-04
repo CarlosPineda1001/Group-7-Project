@@ -6,6 +6,9 @@
 <body>
     <%- include('./partials/nav.ejs') %>
 
+    <% const tempExpirationDate = '10/22/2022' %> 
+    <% const tempDateIssued = '08/25/2021' %>
+
 <div>
 <div Style = "padding:50px;">
     <label for = "doctype" style = "padding:30px; font-size:20px;">Document Type:</label>
@@ -27,14 +30,15 @@
 <div class = "Files">
 
   <div class = 'Doc content' >
-    <h2>All Docs</h2>
+    <h2>All Docs <span style = 'float:right; padding-right: 20px'>Upload Date</span> <span style = 'float:right;padding-right: 20px'>Expiration</span></h2>
     <div>
 
       
       <% if(docs.length > 0) { %>
           <% docs.forEach(doc => { %>
               <a href = "/Document_Details/<%= doc._id%>">
-                  <h3 class ="docu_Group" style = 'background-color: rgb(205,197,197); display: block;'><%= doc.docu_Group %></h3>
+                  <h3 class ="docu_Group" style = 'background-color: rgb(205,197,197); display: block;'><%= doc.docu_Group %>
+                    <span style='float:right;padding-right: 20px'><%= tempDateIssued %></span> <span style='float:right;padding-right: 20px'><%= tempExpirationDate %></span> </h3>
               </a>
           <% }) %>
       <% } else { %>

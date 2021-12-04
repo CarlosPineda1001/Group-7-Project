@@ -1,6 +1,4 @@
 const Doc = require('../Models/document_Schema');
-const multer = require('multer');
-
 
 const viewPage_index = (req,res)=>{
     Doc.find().sort({ createdAt: -1})
@@ -10,30 +8,6 @@ const viewPage_index = (req,res)=>{
         .catch((err)=>{
             console.log(err);
         });
-};
-
-const viewPage_Post_ImageAndDetails = (req,res, next)=>{
-    //file_ID array
-    let fileIDs = [];
-    req.files.forEach((file, index)=>{
-        
-        fileIDs[index]=file.filename
-         return fileIDs;
-     })
-    const doc = new Doc({
-        
-        docu_Group: req.body.docu_Group,
-        docu_Type: req.body.docu_Type,
-        file_ID: fileIDs
-       
-    });
-    doc.save()
-    .then(result => {
-      res.redirect('/ViewPage_Default');
-    })
-    .catch(err => {
-      console.log(err);
-    });
 };
 
 const viewPage_image = (req,res)=>{
@@ -62,6 +36,5 @@ const viewPage_image = (req,res)=>{
 
 module.exports = {
     viewPage_index,
-    viewPage_Post_ImageAndDetails,
     viewPage_image
 }
