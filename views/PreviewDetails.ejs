@@ -33,11 +33,13 @@
                     <% for(var i=0; i<doc.file_ID.length; i++){ %>
                         <% if (i == 0){ %>
                             <div class="carousel-item active">
-                                <img src="http://localhost:5000/ViewPage_Default/document/<%= doc.file_ID[i] %>" width = "60%" height ="900px;" >
+                                <!-- <img src="http://localhost:5000/ViewPage_Default/document/<%= doc.file_ID[i] %>" width = "60%" height ="900px;" > -->
+                                <img src="https://group-7-project-appdev.herokuapp.com/<%= doc.file_ID[i] %>" width = "60%" height ="900px;" >
                               </div>
                         <% } else{ %>
                             <div class="carousel-item " >
-                                <img src="http://localhost:5000/ViewPage_Default/document/<%= doc.file_ID[i] %>" width = "60%" height ="900px;" >
+                                <!-- <img src="http://localhost:5000/ViewPage_Default/document/<%= doc.file_ID[i] %>" width = "60%" height ="900px;" > -->
+                                <img src="https://group-7-project-appdev.herokuapp.com/<%= doc.file_ID[i] %>" width = "60%" height ="900px;" >
                               </div>
                             <% } %>
                       <% } %>
