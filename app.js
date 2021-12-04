@@ -7,6 +7,7 @@ const multer = require('multer');
 const {GridFsStorage} = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const session = require('express-session');
+const axios = require('axios');
 
 const ViewPage_DefaultRoutes = require('./routes/ViewPage_DefaultRoutes');
 
@@ -351,7 +352,8 @@ app.post('/ViewPage_Default',upload.array('file',12), (req,res, next)=>{
         docu_Type: req.body.docu_Type,
         file_ID: fileIDs,
         file_Name: filenames,
-        created_By: userNow
+        created_By: userNow,
+        modified_By: userNow
        
     });
     doc.save()
@@ -375,47 +377,69 @@ app.get('/Document_Details/:id', (req, res) =>{
 });
 
 //add attach files
-app.post('/Document_Details/:id', upload.single('attch_file'), (req, res) =>{
-    const id = req.params.id;
-    console.log('here')
-    Doc.findByIdAndUpdate(id,{
-        date_Lmodified: dateNow,
-        modified_By: userNow,
-        $push: {
-            file_ID: req.file.filename,
-            file_Name: req.file.metadata
-        }
-        
-    },(err, result)=>{
-        if(err){
-            res.send(err)
-        }
-        else{
-            res.redirect('back');
-        }
-
-    })
-});
-//details
-app.patch('/Document_Details/:id', (req, res) =>{
+app.post('/Document_Details/:id', upload.single('attch_file'), (req, res, next) =>{
     const id = req.params.id;
     const file = req.body.file_name;
 
-    console.log(file);
-    Doc.findByIdAndUpdate(id,{
+    
+    console.log('here');
+
+    if(file == undefined){
+        Doc.findByIdAndUpdate(id,{
+            date_Lmodified: dateNow,
+            modified_By: userNow,
+            $push: {
+                file_ID: req.file.filename,
+                file_Name: req.file.metadata
+            }
+            
+        },(err, result)=>{
+            if(err){
+                res.send(err)
+            }
+            else{
+                res.redirect('back');
+            }
+    
+        })
+    }else{
+        console.log(file);
+        Doc.findByIdAndUpdate(id,{
         
         $pull: {file_Name: file}
         
-    },(err, result)=>{
-        if(err){
-            res.send(err)
-        }
-        else{
-            res.redirect('back');
-        }
-
-    })
+        })
+    }
 });
+//details
+// axios.put('/Document_Details/:id',)
+//     .then((res)=>{
+//         console.log(req.params.id)
+//     })
+//     .catch(err => {
+//         console.log(err);
+//     });
+
+// app.post('/Document_Details/61ab03401db0f116d88c2c36', (req, res) =>{
+//     const id = req.params.id;
+//     const file = req.body.file_name;
+
+//     console.log("Hello");
+//     Doc.findByIdAndUpdate(id,{
+        
+//         $pull: {file_Name: file}
+        
+//     },(err, result)=>{
+//         if(err){
+//             res.send(err)
+//         }
+//         else{
+            
+//             res.redirect('back');
+//         }
+
+//     })
+// });
 
 
 app.post('/register', (req,res)=>{
