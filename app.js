@@ -131,10 +131,14 @@ const storage = new GridFsStorage({
             return reject(err);
           }
           const filename = buf.toString('hex');
+          const alias = file.originalname;
           const fileInfo = {
-            filename: filename,
+            filename: filename, 
+            metadata:  alias,
             bucketName: 'docs'
+           
           };
+
           resolve(fileInfo);
         });
       });
@@ -143,6 +147,28 @@ const storage = new GridFsStorage({
 
 const upload = multer({ storage })
 
+
+//profile img storage engine
+const imgStorage = new GridFsStorage({
+    url: dbURI,
+    file: (req, file) => {
+      return new Promise((resolve, reject) => {
+        crypto.randomBytes(16, (err, buf) => {
+          if (err) {
+            return reject(err);
+          }
+          const filename = buf.toString('hex');
+          const fileInfo = {
+            filename: filename,
+            bucketName: 'accs'
+          };
+          resolve(fileInfo);
+        });
+      });
+    }
+  });
+
+  const imgUpload = multer({ imgStorage })
 //lsten to what page
 
 app.get('/register', (req, res) =>{
@@ -244,16 +270,23 @@ app.post('/', (req,res)=>{
 app.post('/ViewPage_Default',upload.array('file',12), (req,res, next)=>{
     //file_ID array
     let fileIDs = [];
+    let filenames = [];
     req.files.forEach((file, index)=>{
         
         fileIDs[index]=file.filename
          return fileIDs;
+     })
+    req.files.forEach((file, index)=>{
+        
+        filenames[index]=file.metadata
+         return filenames;
      })
     const doc = new Doc({
         
         docu_Group: req.body.docu_Group,
         docu_Type: req.body.docu_Type,
         file_ID: fileIDs,
+        file_Name: filenames,
         created_By: userNow
        
     });
@@ -279,11 +312,14 @@ app.get('/Document_Details/:id', (req, res) =>{
 //add attach files
 app.post('/Document_Details/:id', upload.single('attch_file'), (req, res) =>{
     const id = req.params.id;
-
+    console.log('here')
     Doc.findByIdAndUpdate(id,{
         date_Lmodified: dateNow,
         modified_By: userNow,
-        $push: {file_ID: req.file.filename}
+        $push: {
+            file_ID: req.file.filename,
+            file_Name: req.file.metadata
+        }
         
     },(err, result)=>{
         if(err){
@@ -295,6 +331,27 @@ app.post('/Document_Details/:id', upload.single('attch_file'), (req, res) =>{
 
     })
 });
+//details
+app.patch('/Document_Details/:id', (req, res) =>{
+    const id = req.params.id;
+    const file = req.body.file_name;
+
+    console.log(file);
+    Doc.findByIdAndUpdate(id,{
+        
+        $pull: {file_Name: file}
+        
+    },(err, result)=>{
+        if(err){
+            res.send(err)
+        }
+        else{
+            res.redirect('back');
+        }
+
+    })
+});
+
 
 app.post('/register', (req,res)=>{
             let email = req.body.New_Email;

@@ -91,16 +91,20 @@
         <div>
             <hr style= "border-top: 10px solid #8c8b8b; width: 100%; margin-top:50px;"></hr>
             
-             <h1>Attached File:</h1>
-            <div>
-                <% if(doc.file_ID.length > 0 ){ %>
-                    <% doc.file_ID.forEach((element, index) => { %>
-                  
-                        <input type="text" id="file_ID" name="file_ID" value= "<%= doc.file_ID[index] %>" style ="width: 60%; height: 35px; margin-top:10px; margin-left: 49px;">
+            <h1>Attached File:</h1>
+            <form action="/Document_Details/<%=doc._id%>" method="PATCH" enctype="multipart/form-data">
+                <div>
+                    <% if(doc.file_ID.length > 0 ){ %>
+                        <% doc.file_ID.forEach((element, index) => { %>
                     
-                    <% }) %>
-                <% } %> 
-            </div>
+                            <input type="text" id="file_name" name="file_name" value= "<%= doc.file_Name[index] %>" style ="width: 60%; height: 35px; margin-top:10px; margin-left: 49px;">
+                            <button for="file_name" type="submit" value="Delete" class="delbtn" style ="width: 5%; height:5%; text-align: center;">Delete</button>
+                        <% }) %>
+                    <% } %> 
+                </div>
+
+            </form>
+           
 
 
              <form action="/Document_Details/<%=doc._id%>" method="POST" enctype="multipart/form-data">
@@ -108,7 +112,7 @@
                             <button type="submit" value="Submit" class="btn btn-primary btn-block" style ="width: 10%; float:right; margin: 10px; background-color: rgb(121, 187, 21); border-color:rgb(121, 187, 21);">Add</button>
                                 <label for="snippet"></label>
                                 <div class="custom-file mb-3" style ="width: 60%; height: 35px; float:right;" >
-                                    <input type="file" name="attch_file" id="attch_file" class="custom-file-input">
+                                    <input type="file" name="attch_file" id="attch_file" class="custom-file-input" required>
                                     <label for="attch_file" class="custom-file-label" style = "text-align:left; margin-left: 60px ">Choose file</label>
                                 </div>
                             
