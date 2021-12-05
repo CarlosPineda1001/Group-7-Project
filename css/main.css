@@ -33,12 +33,12 @@
     font-weight:bold;
     font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     display: inline-block;
-    font-size: 13;
+    font-size: 20;
     transition-duration: 0.6s;
     margin: 10px 10px 10px;
-    width: 60%;
-    padding: 2%;
-    background-color: #21a001;
+    width: 400px;
+    padding: 10px;
+    background-color: rgb(140, 212, 106);
   }
   .buttonsub:hover {
     background-color: rgb(0, 0, 0);
@@ -242,7 +242,7 @@ h2{
 .input-field {
   width: 60%;
   /*height: 10%;*/
-  font-size: auto;
+  font-size: 25px;
   padding: 10px;
   margin-top: 10px;
   text-align: left;
@@ -253,7 +253,7 @@ h2{
   padding: 10px;
   width: 30%;
   margin-top:10px;
-  font-size: auto;
+  font-size: 25px;
   text-align:left;
   padding-left: 50px;
 }
@@ -262,6 +262,18 @@ h2{
 
 /* The Modal (background) */
 .modal {
+  display: none;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal2 {
   display: none;
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -328,4 +340,43 @@ h2{
 
 .nothing{
   display:none;
+}
+
+.resetbtn{
+  background-color:rgb(255, 205, 30); /* Green */
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin:40px;
+  margin-left:150px;
+  font-weight:bold;
+  border-radius: 9px;
+}
+
+.resetbtn2{
+  background-color:rgb(255, 205, 30); /* Green */
+  border: none;
+  color: rgb(0, 0, 0);
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin:40px;
+  border-radius: 9px;
+  font-size:25px;
+  font-weight:500;
+}
+
+.delbtn{
+  background-color: rgb(238, 238, 238); /* Blue background */
+  border: none; /* Remove borders */
+  padding: 10px 10px; /* Some padding */
+  font-size: 25px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+  color: red;
 }

@@ -38,10 +38,13 @@
 <script>
 if (document.URL.includes("/NewDocs") ) {
   document.getElementById("newdocs").style.color = "rgb(57, 201, 206)";
-}if (document.URL.includes("/ViewPage_Default")){
+  document.getElementById("newdocs").style.textDecoration = "underline";
+}if (document.URL.includes("/ViewPage_Default")||document.URL.includes("/Document_Details")){
   document.getElementById("files").style.color = "rgb(57, 201, 206)";
+  document.getElementById("files").style.textDecoration = "underline";
 }if (document.URL.includes("account")){
   document.getElementById("account").style.color = "rgb(57, 201, 206)";
+  document.getElementById("account").style.textDecoration = "underline";
 }else{
   console.log("no page active")
 }
