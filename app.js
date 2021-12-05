@@ -159,7 +159,6 @@ app.get('/register',requireAdmin, (req, res) =>{
 
 function requireAdmin (req, res, next) {
     const user_Role = userRole;
-    console.log(user_Role);
       if (user_Role == true) {
         next();
       } else {
@@ -219,8 +218,6 @@ let newPass2 = req.body.NewPassword2;
             var encryptedPass = cipher2.update(newPass1, 'utf8', 'hex');
             encryptedPass = encryptedPass + cipher2.final('hex');
         
-            console.log(encryptedPass);
-        
             
            Acc.findOneAndUpdate({user_Email: encryptedEmail}, {user_Password: encryptedPass },{new:true}, (error,data)=>{
                if(error){
@@ -279,22 +276,15 @@ app.post('/', (req,res)=>{
         Acc.findOne({user_Email: encryptedEmail})
             .then((user)=>{
                 if(user.user_Password == encryptedPass){
-                    
-                  //  console.log("email exists!");
-                    console.log("nakalogin kana boy");
-                    console.log(user);
                     userNow = user.l_Name + ", " + user.f_Name;
                     userFirstName = user.f_Name;
                     userLastName = user.l_Name;
                     password = user.user_Password;
                     userRole = user.user_Role;
 
-                   //console.log(userFirstName + " " + userLastName);
                    res.redirect('/');
-                   // if(pass == )
+                   
                    logged_in = true;
-                   // req.session.user = user;
-                   //console.log("user: "+ req.session.user);
                 }else{
                     
                     console.log("Wrong Password");
@@ -306,9 +296,6 @@ app.post('/', (req,res)=>{
             )
             .catch((err) => console.log("Invalid Credentials")
                             );
-
-    console.log(email);
-    console.log(pass);
 
 });
 
@@ -426,7 +413,7 @@ app.post('/register', (req,res)=>{
             encryptedPass = encryptedPass + cipher2.final('hex');
 
         const account = new Acc({
-            //user_ID: '00001',
+
             f_Name: firstName,
             l_Name: lastName,
             user_Email: encryptedEmail,
@@ -434,23 +421,11 @@ app.post('/register', (req,res)=>{
             user_Role: false
             
         });
-
-            console.log(encryptedEmail);
-            console.log(encryptedPass);
-            console.log(firstName);
-            console.log(lastName);
-        
-            
+              
         Acc.findOne({user_Email: encryptedEmail})
             .then((user)=>{
 
-             
-                //console.log(encrypted);
-               // user.user_Email = 
-
                 if(user){
-                    //let errors = [];
-                   // errors.push({text: 'email already exists'});
                     console.log("email already exists");
                  console.log(user);
                 }else{
@@ -459,8 +434,7 @@ app.post('/register', (req,res)=>{
                     console.log(account);
 
                      account.save()
-                             .then((result)=>{
-                            //console.log(req.body);                  
+                             .then((result)=>{                 
                             
                             })
                             .catch((err)=>{
@@ -472,7 +446,7 @@ app.post('/register', (req,res)=>{
                             }
             
                       }
-                      //res.redirect('/register');//
+
                       })
 });
 
