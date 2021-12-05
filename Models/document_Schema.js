@@ -43,36 +43,28 @@ const documentSchema =  new Schema({
     file_ID:[String],
     file_Name:[String],
     docu_Group:{
-        type: String,
-        // required: true
+        type: String
     },
     docu_Type:{
-        type: String,
-       // required: true
+        type: String
     },
     date_Exp:{
-        type: Date,
-        //required: true
+        type: Date
     },
     date_Issued:{
-        type: Date, 
-       // required: true
+        type: Date
     },
     date_Created:{
         type: String, default: dateNow
-       // required: true
     },
     date_Lmodified:{
         type: String, default: dateNow
-       // required: true
     },
     modified_By:{
-        type: String, 
-        //required: true
+        type: String
     },
     created_By:{
-        type: String,
-        //required: true
+        type: String
     }
 }, {
     versionKey: false 
