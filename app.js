@@ -146,8 +146,9 @@ const imgStorage = new GridFsStorage({
 
   const imgUpload = multer({ imgStorage })
 //lsten to what page
-app.get('/register',requireAdmin, (req, res) =>{
-    if(logged_in){
+app.get('/register', (req, res) =>{
+    const user_Role = userRole;
+    if(logged_in && user_Role == true){
 
         res.render('Register', {title: "Registration"});
     }
@@ -156,15 +157,6 @@ app.get('/register',requireAdmin, (req, res) =>{
     }
 
 });
-
-function requireAdmin (req, res, next) {
-    const user_Role = userRole;
-      if (user_Role == true) {
-        next();
-      } else {
-        res.redirect('/');
-      }
-  };
 
 app.get('/', (req, res) =>{
 
