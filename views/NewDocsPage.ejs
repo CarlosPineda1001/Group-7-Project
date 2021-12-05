@@ -9,6 +9,8 @@
 <body>
     <%- include('./partials/nav.ejs') %>
 
+    <div class="biccbox">
+        <div style ="padding:50px;"></div>
 <div>
    <center>
     <img id= "filePreview">
@@ -32,7 +34,7 @@
                     
                     <center>
                         <label for="snippet">Document Group</label>
-                        <input type="text" id="docu_Group" name="docu_Group" style ="width: 60%; height: 35px; margin-right:11px; " >
+                        <input type="text" id="docu_Group" name="docu_Group" style ="width: 60%; height: 35px; margin-left:5px; " >
                     </center>
                          
                     <center>
@@ -49,12 +51,14 @@
                 
                 <div style ="margin-right: 10px;">
                 <center>
-                    <label for="snippet">File</label>
-                    <div class="custom-file mb-3" style ="width: 60%; height: 35px;" >
+                    
+                    <div style = "margin-left:150px;">File
+                    <div class="custom-file mb-3" style ="width: 78%; height: 35px; margin-right:100px;" >
                         <input type="file" name="file" id="file" class="custom-file-input" onchange="loadFile(event)" multiple  required>
                         <label for="file" class="custom-file-label" style = "text-align:left; margin-left: 60px">Choose file</label>
                     </div>
                 
+                </div>
                     <script type="text/javascript">
 
                         $('.custom-file input').change(function (e) {
@@ -74,9 +78,10 @@
             </div>
         </div>
     </div>
-    <center><button type="submit" value="Submit" class="btn btn-primary btn-block" style ="width: 8%;  height: 50px; margin-top: 30px; font-size: 25px;">Upload</button></center>
+    <center><button type="submit" value="Submit" class="btn btn-primary btn-block" style ="width: 150px;  height: 50px; margin-top: 30px; font-size: 25px;">Upload</button></center>
 </form>
 
+</div>
 
 
 
