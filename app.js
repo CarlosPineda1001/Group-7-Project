@@ -7,7 +7,6 @@ const multer = require('multer');
 const {GridFsStorage} = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const session = require('express-session');
-const axios = require('axios');
 
 const ViewPage_DefaultRoutes = require('./routes/ViewPage_DefaultRoutes');
 
@@ -17,37 +16,9 @@ const Doc = require('./Models/document_Schema');
 //express app
 //instance of express app
 const app = express();
-/*
-const secret = 'abcdefg';
-const hash = crypto.createHmac('sha256', secret)
-                .update('Welcome to Techweber')
-                .digest('hex');
-
-console.log(hash);*/
-
-
-/*const cipher = crypto.createCipher('aes192', 'a password');
-var encrypted = cipher.update('Malaki na ba yan?', 'utf8', 'hex');
-
-encrypted = encrypted + cipher.final('hex');
-console.log(encrypted);*/
-
-//317c37cbfd2be29b03917f6df9a7cf41
-
-/*
-const decipher = crypto.createDecipher('aes192', 'a password')
-
-var decrypted = decipher.update(encrypted,'hex', 'utf8');
-decrypted = decrypted + decipher.final('utf8');
-
-console.log(decrypted);
-
-*/
 
 const demo ={em: "marcelusandrei@gmail.com", 
                  pass: "gangplank"};
-
-                 
 
 let logged_in = false;
 let userFirstName = "defaultFirstName";
@@ -72,7 +43,6 @@ app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 app.use(session({secret:"12345ggggg", resave:false, saveUninitialized: true }));
 
-
 // connect to mongodb
 const dbURI = 'mongodb+srv://Carlos:XpaZ@mongouploads.zxnhp.mongodb.net/Document_Database?retryWrites=true&w=majority';
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -82,7 +52,6 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
         }); 
     })
     .catch((err) => console.log(err));
-
 
 const date = new Date(Date.now());
 
@@ -155,7 +124,6 @@ const storage = new GridFsStorage({
 
 const upload = multer({ storage })
 
-
 //profile img storage engine
 const imgStorage = new GridFsStorage({
     url: dbURI,
@@ -218,7 +186,6 @@ app.get('/Loginpage', (req, res) =>{
    res.redirect('/');
   
 });
-
 
 app.get('/account_details', (req, res) => {
 
@@ -378,7 +345,6 @@ app.post('/ViewPage_Default',upload.array('file',12), (req,res, next)=>{
       console.log(err);
     });
 });
-
 
 //displaying document additional details
 app.get('/Document_Details/:id', (req, res) =>{
