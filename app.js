@@ -261,19 +261,22 @@ let newPass2 = req.body.NewPassword2;
         
                }else{
                    console.log("password has been changed to: "+ data);
+                setTimeout(function(){
                     res.redirect('/account_details');
+                }, 5500);
+                    
                 }
            })
            
         }else{
             console.log("the passwords do not match.");
-           
+            res.redirect('/account_details');
 
         }
 }else{
 
     console.log("The password you have entered is incorrect.");
-  
+    res.redirect('/account_details');
 
 }
 
