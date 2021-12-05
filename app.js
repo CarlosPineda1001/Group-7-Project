@@ -7,7 +7,6 @@ const multer = require('multer');
 const {GridFsStorage} = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const session = require('express-session');
-const axios = require('axios');
 
 const ViewPage_DefaultRoutes = require('./routes/ViewPage_DefaultRoutes');
 
@@ -17,37 +16,9 @@ const Doc = require('./Models/document_Schema');
 //express app
 //instance of express app
 const app = express();
-/*
-const secret = 'abcdefg';
-const hash = crypto.createHmac('sha256', secret)
-                .update('Welcome to Techweber')
-                .digest('hex');
-
-console.log(hash);*/
-
-
-/*const cipher = crypto.createCipher('aes192', 'a password');
-var encrypted = cipher.update('Malaki na ba yan?', 'utf8', 'hex');
-
-encrypted = encrypted + cipher.final('hex');
-console.log(encrypted);*/
-
-//317c37cbfd2be29b03917f6df9a7cf41
-
-/*
-const decipher = crypto.createDecipher('aes192', 'a password')
-
-var decrypted = decipher.update(encrypted,'hex', 'utf8');
-decrypted = decrypted + decipher.final('utf8');
-
-console.log(decrypted);
-
-*/
 
 const demo ={em: "marcelusandrei@gmail.com", 
                  pass: "gangplank"};
-
-                 
 
 let logged_in = false;
 let userFirstName = "defaultFirstName";
@@ -72,7 +43,6 @@ app.use(bodyParser.json());
 app.use(methodOverride('_method'));
 app.use(session({secret:"12345ggggg", resave:false, saveUninitialized: true }));
 
-
 // connect to mongodb
 const dbURI = 'mongodb+srv://Carlos:XpaZ@mongouploads.zxnhp.mongodb.net/Document_Database?retryWrites=true&w=majority';
 mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
@@ -82,7 +52,6 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
         }); 
     })
     .catch((err) => console.log(err));
-
 
 const date = new Date(Date.now());
 
@@ -134,11 +103,11 @@ const storage = new GridFsStorage({
     url: dbURI,
     file: (req, file) => {
       return new Promise((resolve, reject) => {
-        crypto.randomBytes(16, (err, buf) => {
+        crypto.randomBytes(5, (err, buf) => {
           if (err) {
             return reject(err);
           }
-          const filename = buf.toString('hex');
+          const filename = "("+ buf.toString('hex')+ ")" + file.originalname ;
           const alias = file.originalname;
           const fileInfo = {
             filename: filename, 
@@ -154,7 +123,6 @@ const storage = new GridFsStorage({
   });
 
 const upload = multer({ storage })
-
 
 //profile img storage engine
 const imgStorage = new GridFsStorage({
@@ -178,26 +146,17 @@ const imgStorage = new GridFsStorage({
 
   const imgUpload = multer({ imgStorage })
 //lsten to what page
-app.get('/register',requireAdmin, (req, res) =>{
-    if(logged_in){
+app.get('/register', (req, res) =>{
+    const user_Role = userRole;
+    if(logged_in && user_Role == true){
 
-        res.render('Register', {title: "Registration"});
+        res.render('register', {title: "Registration"});
     }
     else{
         res.redirect('/');
     }
 
 });
-
-function requireAdmin (req, res, next) {
-    const user_Role = userRole;
-    console.log(user_Role);
-      if (user_Role == true) {
-        next();
-      } else {
-        res.redirect('/');
-      }
-  };
 
 app.get('/', (req, res) =>{
 
@@ -218,7 +177,6 @@ app.get('/Loginpage', (req, res) =>{
    res.redirect('/');
   
 });
-
 
 app.get('/account_details', (req, res) => {
 
@@ -252,8 +210,6 @@ let newPass2 = req.body.NewPassword2;
             var encryptedPass = cipher2.update(newPass1, 'utf8', 'hex');
             encryptedPass = encryptedPass + cipher2.final('hex');
         
-            console.log(encryptedPass);
-        
             
            Acc.findOneAndUpdate({user_Email: encryptedEmail}, {user_Password: encryptedPass },{new:true}, (error,data)=>{
                if(error){
@@ -261,19 +217,22 @@ let newPass2 = req.body.NewPassword2;
         
                }else{
                    console.log("password has been changed to: "+ data);
+                setTimeout(function(){
                     res.redirect('/account_details');
+                }, 5500);
+                    
                 }
            })
            
         }else{
             console.log("the passwords do not match.");
-           
+            res.redirect('/account_details');
 
         }
 }else{
 
     console.log("The password you have entered is incorrect.");
-  
+    res.redirect('/account_details');
 
 }
 
@@ -309,22 +268,15 @@ app.post('/', (req,res)=>{
         Acc.findOne({user_Email: encryptedEmail})
             .then((user)=>{
                 if(user.user_Password == encryptedPass){
-                    
-                  //  console.log("email exists!");
-                    console.log("nakalogin kana boy");
-                    console.log(user);
                     userNow = user.l_Name + ", " + user.f_Name;
                     userFirstName = user.f_Name;
                     userLastName = user.l_Name;
                     password = user.user_Password;
                     userRole = user.user_Role;
 
-                   //console.log(userFirstName + " " + userLastName);
                    res.redirect('/');
-                   // if(pass == )
+                   
                    logged_in = true;
-                   // req.session.user = user;
-                   //console.log("user: "+ req.session.user);
                 }else{
                     
                     console.log("Wrong Password");
@@ -336,9 +288,6 @@ app.post('/', (req,res)=>{
             )
             .catch((err) => console.log("Invalid Credentials")
                             );
-
-    console.log(email);
-    console.log(pass);
 
 });
 
@@ -376,7 +325,6 @@ app.post('/ViewPage_Default',upload.array('file',12), (req,res, next)=>{
     });
 });
 
-
 //displaying document additional details
 app.get('/Document_Details/:id', (req, res) =>{
     const id = req.params.id;
@@ -393,7 +341,6 @@ app.post('/Document_Details/:id', upload.single('attch_file'), (req, res, next) 
     const file = req.body.file_name;
 
     
-    console.log('here');
 
     if(file == undefined){
         Doc.findByIdAndUpdate(id,{
@@ -413,44 +360,30 @@ app.post('/Document_Details/:id', upload.single('attch_file'), (req, res, next) 
             }
     
         })
-    }else{
-        console.log(file);
-        Doc.findByIdAndUpdate(id,{
+    }
+    //delete attach file
+    else{
+
+        Doc.findByIdAndUpdate(id,
+        {
+            $pull: {
+                file_ID: file
+             }
+        },
+
+
         
-        $pull: {file_Name: file}
-        
+        (err, result)=>{
+            if(err){
+                res.send(err)
+            }
+            else{
+                res.redirect('back');
+            }
+    
         })
     }
 });
-//details
-// axios.put('/Document_Details/:id',)
-//     .then((res)=>{
-//         console.log(req.params.id)
-//     })
-//     .catch(err => {
-//         console.log(err);
-//     });
-
-// app.post('/Document_Details/61ab03401db0f116d88c2c36', (req, res) =>{
-//     const id = req.params.id;
-//     const file = req.body.file_name;
-
-//     console.log("Hello");
-//     Doc.findByIdAndUpdate(id,{
-        
-//         $pull: {file_Name: file}
-        
-//     },(err, result)=>{
-//         if(err){
-//             res.send(err)
-//         }
-//         else{
-            
-//             res.redirect('back');
-//         }
-
-//     })
-// });
 
 
 app.post('/register', (req,res)=>{
@@ -472,7 +405,7 @@ app.post('/register', (req,res)=>{
             encryptedPass = encryptedPass + cipher2.final('hex');
 
         const account = new Acc({
-            //user_ID: '00001',
+
             f_Name: firstName,
             l_Name: lastName,
             user_Email: encryptedEmail,
@@ -480,23 +413,11 @@ app.post('/register', (req,res)=>{
             user_Role: false
             
         });
-
-            console.log(encryptedEmail);
-            console.log(encryptedPass);
-            console.log(firstName);
-            console.log(lastName);
-        
-            
+              
         Acc.findOne({user_Email: encryptedEmail})
             .then((user)=>{
 
-             
-                //console.log(encrypted);
-               // user.user_Email = 
-
                 if(user){
-                    //let errors = [];
-                   // errors.push({text: 'email already exists'});
                     console.log("email already exists");
                  console.log(user);
                 }else{
@@ -505,8 +426,7 @@ app.post('/register', (req,res)=>{
                     console.log(account);
 
                      account.save()
-                             .then((result)=>{
-                            //console.log(req.body);                  
+                             .then((result)=>{                 
                             
                             })
                             .catch((err)=>{
@@ -518,7 +438,8 @@ app.post('/register', (req,res)=>{
                             }
             
                       }
-                      res.redirect('/register');  })
+
+                      })
 });
 
 // route for ViewPage
