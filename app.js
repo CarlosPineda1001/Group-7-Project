@@ -147,14 +147,14 @@ const imgStorage = new GridFsStorage({
   const imgUpload = multer({ imgStorage })
 //lsten to what page
 app.get('/register', (req, res) =>{
-    const user_Role = userRole;
-    if(logged_in && user_Role == true){
+    // const user_Role = userRole;
+    // if(logged_in && user_Role == true){
 
         res.render('Register', {title: "Registration"});
-    }
-    else{
-        res.redirect('/');
-    }
+    // }
+    // else{
+    //     res.redirect('/');
+    // }
 
 });
 
