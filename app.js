@@ -150,7 +150,7 @@ app.get('/register', (req, res) =>{
     // const user_Role = userRole;
     // if(logged_in && user_Role == true){
 
-        res.render('Register', {title: "Registration"});
+        res.render('register', {title: "Registration"});
     // }
     // else{
     //     res.redirect('/');
