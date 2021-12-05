@@ -134,7 +134,8 @@ h1{
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-  text-align: left;
+  text-align: center;
+  font-size: 22px;
 }
 
 
@@ -148,6 +149,7 @@ h1{
   background-color: #ddd;
   color: black;
   position:relative;
+  
 }
 
 /* Show the dropdown menu when the user moves the mouse over the dropdown button */
@@ -379,4 +381,14 @@ h2{
   font-size: 25px; /* Set a font size */
   cursor: pointer; /* Mouse pointer on hover */
   color: red;
+
+  
+}
+
+.biccbox{
+  
+  padding-bottom:480px;
+  padding-top:10px;
+  margin:20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

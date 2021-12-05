@@ -4,16 +4,23 @@
 <%- include ('./partials/head.ejs') %>
 
 <body>
-<div style = " "><%- include('./partials/nav.ejs') %></div>
+<%- include('./partials/nav.ejs') %></div>
     
 
     <% const tempExpirationDate = '10/22/2022' %> 
     <% const tempDateIssued = '08/25/2021' %>
 
-<div>
-<div Style = "padding:50px;">
-  <p class = "doc_Type">Document Type:         
-    <select id ="docu_Type" name="docu_Type" style ="width: 30%; height: 35px; margin-top:10px;">
+    <div class="biccbox">
+      <div style ="padding:50px;"></div>
+<div>  
+<div >
+    
+            <div style="width:100%;">
+                <div class = "row"  >
+                  <div class = "col" >
+                    <div style ="padding:10px;"></div>
+      <p class = "doc_Type" style="padding-left:80px;font-size: 25px;">Document Type:         
+        <select id ="docu_Type" name="docu_Type" style ="width: 48%; height: 35px;" onchange="searchable2()">
         <option value="placeholder"></option>
         <option value="Balance Sheet">Balance Sheet</option>
         <option value="Bank Statement">Bank Statement</option>
@@ -26,6 +33,7 @@
         <option value="Franchise Agreement">Franchise Agreement</option>
         <option value="Income Statement">Income Statement</option>
         <option value="Insurance">Insurance</option>
+        <option value="Permit">Permit</option>
         <option value="Invoice">Invoice</option>
         <option value="Receipt">Receipt</option>
         <option value="License">License</option>
@@ -39,9 +47,11 @@
     </select>
 </p>
                 </div>
-                <div>
-           <div style="width:600px;">
-            <input type="text" id="myInput" onkeyup="searchable()" placeholder="Search for Document Group" style ="width: 75%; height: 35px;">
+               
+                <div style>
+                  <div style ="padding:10px;"></div>
+           <div style="width:500px;">
+            <input type="text" id="myInput" onkeyup="searchable()" placeholder="Search for Document Group" style ="width: 85%; height: 35px;">
         </div>
 
         
@@ -50,7 +60,6 @@
               </div>
             </div>
 
-</div>
 
 
 </div>
@@ -63,13 +72,13 @@
     <div class = 'doc_content_head' style="width:100%; padding-bottom:5px;">
 
 
-      <div class="toppart" style = " padding-bottom:15px;">
+      <div class="toppart" >
         <div id = "sortName" onclick="sortListDir(); toggleupdown1();"  
-        style="float:left; width:15%; color: rgb(57, 201, 206);
-         border-color:white; margin-left:130px; font-size:30px;">Document Groups <i id = "caret1"class="nothing"></i>
+        style="float:left; width:20%; color: rgb(57, 201, 206);
+         border-color:white; margin-left:100px; font-size:25px;">Document Group <i id = "caret1"class="nothing"></i>
 </div>
-    <div style="float:right; width:20;color: rgb(57, 201, 206); margin-right:115px; font-size:30px; " onclick="toggleupdown2();">Upload Date<i id = "caret2"class="nothing"></i></div>
-    <div style="float:right; width:20; color: rgb(57, 201, 206); margin-right:15px; font-size:30px; " onclick="toggleupdown3();">Expiration<i id = "caret3"class="nothing"></i></div>
+    <div style="float:right; width:20;color: rgb(57, 201, 206); margin-right:55px; font-size:25px; " onclick="toggleupdown2();">Upload Date<i id = "caret2"class="nothing"></i></div>
+    <div style="float:right; width:20; color: rgb(57, 201, 206); margin-right:110px; font-size:25px; " onclick="toggleupdown3();">Expiration<i id = "caret3"class="nothing"></i></div>
     
     </div>
   </div>
@@ -79,15 +88,15 @@
 
   
 <ul id="id01" style="list-style-type: none;">
-  <div  style= "padding: 60px;" >      
+  <div  style= "padding-top: 55px;" >      
     <% if(docs.length > 0) { %>
         <% docs.forEach(doc => { %>
           <li>
            <div style="display:none;"><%= doc.docu_Group %></div> 
             <a id = "items" href = "/Document_Details/<%= doc._id%>">
               <div1 style="display:none;"><%= doc.docu_Type %> </div1>
-                <h3  class ="docu_Group" style = 'background-color: rgb(233, 233, 233); display: block; width:95%; margin:auto; padding:10px; margin-bottom:10px; color:black;'><%= doc.docu_Group %>
-                  <span1 style='float:right;padding-right: 20px'><%= doc.date_Created%></span1> <span2 style='float:right;padding-right: 20px'><%= tempExpirationDate %></span2> </h3>
+                <h4  class ="docu_Group" style = 'background-color: rgb(250, 250, 250); display: block; width:95%; margin:auto; padding:10px; margin-bottom:10px; color:black;'><%= doc.docu_Group %>
+                  <span1 style='float:right;padding-right: 20px'><%= doc.date_Created%></span1> <span2 style='float:right;padding-right: 110px'><%= tempExpirationDate %></span2> </h4>
             </a>
           </li>
         <% }) %>
@@ -238,5 +247,7 @@ function toggleupdown3(){
 
 
 </div>
+</div>
+
 </body>
 </html>
