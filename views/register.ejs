@@ -8,17 +8,21 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
     crossorigin="anonymous">
 
-    <title>Register Page</title>
+    <title >Register Page</title>
 </head>
 
 <body>
     <%- include('./partials/nav.ejs') %>
+    
+
+    <div class="biccbox">
+      <div style ="padding:50px;"></div>
 
     <div>
 <center>
            
 <div class = "sides"> 
-    <h1>Registration</h1>
+    <h1 style =" font-size:25; font-weight:bold; padding-top:10px; padding-bottom:30px;">Registration</h1>
     <form name = "form" action="/register" method="POST" id="contact_form" autocomplete="off">
           
       <div class="row">
@@ -114,6 +118,6 @@ function clickOutside(e) {
 
 </script>
 
-
+</div>
 </body>
 </html>

@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Login Page</title>
-   <!--<script src="js/script.js"></script>--> 
 </head>
 <body>
 
@@ -15,17 +14,17 @@
     <div>
 <center>
 
-<div class = "sides" Style = "margin-top:100px;"> 
+<div class = "sides" Style = "margin-top:100px; font-family: Arial, sans-serif;"> 
     <form action="/" method="POST">
-    <h1>Sign In</h1>
+    <h1 style="font-size: 25px;">Sign In</h1>
         <div>
-                <div class="input-icons" style = "padding-top: 10px">
+                <div class="input-icons" style = "padding-top: 10px ">
                     <i class="fa fa-envelope icon"></i>
-                    <input type="text" name = "Email" id = "Email"  placeholder = "Email" class = "input-field" onkeydown="FxUserPress()">
+                    <input type="text" name = "Email" id = "Email"  placeholder = "Email" class = "input-field" onkeydown="FxUserPress()" required>
                </div>
                 <div class="input-icons">
                     <i class="fa fa-lock icon"></i>
-                    <input type="password" name = "Password" id = "Pword"  placeholder = "Password" class = "input-field" onkeydown="FxUserPress()" >
+                    <input type="password" name = "Password" id = "Pword"  placeholder = "Password" class = "input-field" onkeydown="FxUserPress()" required>
                 </div>
         </div>
 
@@ -34,9 +33,6 @@
         
     <button class = "button" type = "submit" >SIGN IN</button>
 
- <!--   <div class = "button" onclick="loginClick()">
-        <a href = "ViewPageDefault" style = "color:inherit;text-decoration:none; "> SIGN IN</a>
-        </div>-->
     </form>
 
     <center>
@@ -87,57 +83,7 @@
                 localStorage.setItem("password", "");
             }
         }
-         /*
-        function setCookie(){
-            var email = document.getElementById('Email').value;
-            var pass = document.getElementById('Pword').value;
-       
-            document.cookie = "myuserName =" + email +";path = http://localhost/5000/";
-            document.cookie = "mypw =" + pass+";path = http://localhost/5000/";
-            
-        
-       
-       
-       
-        }
-
-        function getCookieData(){
-            
-
-           var email = getCookie('myuserName');
-            var pass = getCookie('mypw');
-
-            document.getElementById('Email').value = email;
-            document.getElementById('Pword').value = pass;
-        }
-
-        function getCookie(cname) {
-        var name = cname + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(';');
-        for(var i = 0; i <ca.length; i++) {
-          var c = ca[i];
-          while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-          }
-          if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-          }
-        }
-        return "";
-       }*/
-
-    </script>
-<!---<div class="text"><text Style = "font-size:15px;">
-    Need an Account?</text>
-</div>
-
-    <div class = "buttonsub" >
-    <a href = "register" style = "color:inherit;text-decoration:none"> REGSITER</a>   
-    </div>-->
-  
-    
-            
+    </script>    
            </div>
 
     </div>

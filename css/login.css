@@ -12,11 +12,8 @@
     margin: 10px 10px 10px;
     width: 80%;
     padding: 2%;
-    background-color: #0184A0;
-  }
-
-  .button2{
-    
+    background-color: rgb(106, 168, 212);
+    font-size: 20px;
   }
   
   .button:hover {
@@ -47,8 +44,8 @@
 
 .sides{
   background-color: rgb(255, 255, 255);
-  width: 400px;
-  height: 500px;
+  width: 460px;
+  height: 370px;
   border-radius: 7%;
 }
 body{
@@ -80,6 +77,7 @@ h1{
 
 .input-field {
   width: 80%;
+  margin-bottom:10px;
   padding: 10px;
   text-align: center;
 }
