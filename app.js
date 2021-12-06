@@ -17,9 +17,6 @@ const Doc = require('./Models/document_Schema');
 //instance of express app
 const app = express();
 
-const demo ={em: "marcelusandrei@gmail.com", 
-                 pass: "gangplank"};
-
 let logged_in = false;
 let userFirstName = "defaultFirstName";
 let userLastName = "defaultLastName";
@@ -29,10 +26,7 @@ let password = "defaultPassword";
 let encryptedEmail = "defaultEncryptedEmail";
 let loginErrorMessage = " ";
 
-
-let demo2 = [];
 //register view engine
-const name = 'Macky';
 app.set('view engine', 'ejs');
 
 //middleware
@@ -53,6 +47,7 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
     })
     .catch((err) => console.log(err));
 
+//get date today
 const date = new Date(Date.now());
 
 const dateMonth = date.toString().slice(4,7);
@@ -90,7 +85,7 @@ const dateYear = date.toString().slice(11,15);
 
 const dateNow = dateMonthNew + "/" + dateDay + "/" + dateYear;
 
-
+//initialize gfs
 let datab = mongoose.connection;
 
 datab.once('open', () => {
@@ -125,6 +120,8 @@ const storage = new GridFsStorage({
 const upload = multer({ storage })
 
 //lsten to what page
+
+//Registration page
 app.get('/register', (req, res) =>{
     const user_Role = userRole;
     if(logged_in && user_Role == true){
@@ -137,6 +134,7 @@ app.get('/register', (req, res) =>{
 
 });
 
+//Sign in page 
 app.get('/', (req, res) =>{
 
     if(logged_in){
@@ -149,6 +147,7 @@ app.get('/', (req, res) =>{
   
 });
 
+//Sign out
 app.get('/Loginpage', (req, res) =>{
 
    logged_in = false;
@@ -157,6 +156,7 @@ app.get('/Loginpage', (req, res) =>{
   
 });
 
+//Display account details
 app.get('/account_details', (req, res) => {
 
     if(logged_in){
@@ -169,6 +169,7 @@ app.get('/account_details', (req, res) => {
    
 });
 
+//Change password
 app.post('/account_details', (req, res) => {
 let oldPassword = req.body.oldPassword;
 let newPass1 = req.body.NewPassword1;
@@ -217,6 +218,7 @@ let newPass2 = req.body.NewPassword2;
 
 });
 
+//Go to New docs page
 app.get('/NewDocs', (req, res) =>{
    
     if(logged_in){
@@ -229,6 +231,7 @@ app.get('/NewDocs', (req, res) =>{
    
 });
 
+//check if account was registered in the system (sign in)
 app.post('/', (req,res)=>{
     email = req.body.Email;
     let pass = req.body.Password;
@@ -272,7 +275,6 @@ app.post('/', (req,res)=>{
 
 //creation of new document in system
 app.post('/ViewPage_Default',upload.array('file',12), (req,res, next)=>{
-    //file_ID array
     let filenames = [];
     let filemeta = [];
     req.files.forEach((file, index)=>{
@@ -364,7 +366,7 @@ app.post('/Document_Details/:id', upload.single('attch_file'), (req, res, next) 
     }
 });
 
-
+//registering an account
 app.post('/register', (req,res)=>{
             let email = req.body.New_Email;
             
