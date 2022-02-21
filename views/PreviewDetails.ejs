@@ -13,10 +13,11 @@
 <body>
 
     <%- include('./partials/nav.ejs') %>
+    
     <div class="biccbox">
         <div style ="padding:50px;"></div>
 
-    <div class = 'doc_Content' style="width: 75%;padding-bottom: 1000px; background-color:rgb(255, 255, 255);">
+        <div class = 'doc_Content' style="width: 75%;padding-bottom: 1000px; background-color:rgb(255, 255, 255);">
 
     
 
@@ -26,33 +27,30 @@
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
                 <div class="carousel-inner">
                     
-                    <% for(var i=0; i<doc.file_ID.length; i++){ %>
+                    <% for(var i=0; i<doc.file_Name.length; i++){ %>
                         <% if (i == 0){ %>
                             <div class="carousel-item active">
-
                                 <!-- changed this for localhost usage -->
-                                <!-- <img src="http://localhost:5000/ViewPage_Default/document/<%= doc.file_ID[i] %>" width = "60%" height ="900px;" > -->
-
+                                <!-- <img src="http://localhost:5000/ViewPage_Default/document/<%= doc.file_Name[i] %>" width = "60%" height ="900px;" > -->
                                 <!-- changed this for deployment of website -->
-                                <img src="https://group-7-project-appdev.herokuapp.com/ViewPage_Default/document/<%= doc.file_ID[i] %>" width = "60%" height ="900px;" >
+                                <img src="https://group-7-project-appdev.herokuapp.com/ViewPage_Default/document/<%= doc.file_Name[i] %>" width = "60%" height ="900px;" >
                               </div>
                         <% } else{ %>
                             <div class="carousel-item " >
-
                                 <!-- changed this for localhost usage -->
-                                <!-- <img src="http://localhost:5000/ViewPage_Default/document/<%= doc.file_ID[i] %>" width = "60%" height ="900px;" > -->
+                                <!-- <img src="http://localhost:5000/ViewPage_Default/document/<%= doc.file_Name[i] %>" width = "60%" height ="900px;" > -->
                                 
                                 <!-- changed this for deployment of website -->
-                                <img src="https://group-7-project-appdev.herokuapp.com/ViewPage_Default/document/<%= doc.file_ID[i] %>" width = "60%" height ="900px;" >
+                                <img src="https://group-7-project-appdev.herokuapp.com/ViewPage_Default/document/<%= doc.file_Name[i] %>" width = "60%" height ="900px;" >
                               </div>
                             <% } %>
                       <% } %>
                 
 
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                  <span style="font-weight:bolder; color:rgb(0, 0, 0); font-size:100px;"><</span>
-                  <span class="sr-only">Previous</span>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                     <span style="font-weight:bolder; color:rgb(0, 0, 0); font-size:100px;"><</span>
+                    <span class="sr-only">Previous</span>
                 </a>
                 <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
                     <span style="font-weight:bolder; color:rgb(0, 0, 0); font-size:100px;">></span>
@@ -61,17 +59,17 @@
               </div>
         </center>
 
-            <% const tempExpirationDate = '10/22/2022' %> 
-            <% const tempDateIssued = '08/25/2021' %>
+            <% const tempExpirationDate = '2014-02-09' %> 
+            <% const tempDateIssued = '2014-03-09' %>
 
+            </div>
         </div>
     </div>
 
 
-
     <div style = "background-color:rgb(238, 238, 238); width:95%; margin:auto; height: 100%;" >
   <div style= "background-color: rgb(196, 196, 196); width:100% ;margin: auto; padding-inline: 10px;">
-    <p style =" color:black; font-size: 30px;">Document Details:</p>  
+    <p style =" color:black; font-size: 40px;">Document Details:</p>  
     </div>
     
 
@@ -89,38 +87,21 @@
             <p class = "doc_Type">Document Type:         
                 <select id="list" style ="width: 60%; height: 35px; margin-top:10px;  margin-left: 20px;">
                     <option value="placeholder"><%= doc.docu_Type %></option>
-                    <option value="Balance Sheet">Balance Sheet</option>
-                    <option value="Bank Statement">Bank Statement</option>
-                    <option value="Business Plan">Business Plan</option>
-                    <option value="Business Report">Business Report</option>
-                    <option value="Contract">Contract</option>
-                    <option value="Customer Order">Customer Order</option>
-                    <option value="Debit/Credit Note">Debit/Credit Note</option>
-                    <option value="Employment Agreement">Employment Agreement</option>
-                    <option value="Franchise Agreement">Franchise Agreement</option>
-                    <option value="Income Statement">Income Statement</option>
-                    <option value="Insurance">Insurance</option>
+                    <option value="Permit">Permit</option>
                     <option value="Invoice">Invoice</option>
                     <option value="Receipt">Receipt</option>
-                    <option value="License">License</option>
-                    <option value="Minutes of Meeting">Minutes of Meeting</option>
-                    <option value="Non-disclosure Agreement">Non-disclosure Agreement</option>
-                    <option value="Partnership Agreement">Partnership Agreement</option>
-                    <option value="Payroll Report">Payroll Report</option>
-                    <option value="Permit">Permit</option>
-                    <option value="Policies and Guidelines">Policies and Guidelines</option>
-                    <option value="Supplier Order">Supplier Order</option>
+                    <option value="Test1">Test1</option>
                 </select></p> 
         </div>
 
         <div>
             <label for="doc_Group">Date Issued:</label>
-                <input type="text" id="date_Issued" name="date_Issued" value= "<%= tempDateIssued %>" style ="width: 60%; height: 35px; margin-top:10px; margin-left: 49px; ">
+                <input type="date" id="date_Issued" name="date_Issued" value= "<%= tempDateIssued %>" style ="width: 60%; height: 35px; margin-top:10px; margin-left: 49px; ">
         </div>
 
         <div>
             <label for="doc_Group">Expiration Date:</label>
-                <input type="text" id="doc_group" name="doc_group" value= "<%= tempExpirationDate %>" style ="width: 60%; height: 35px; margin-top:10px; margin-left: 23px;">
+                <input type="date" id="doc_group" name="doc_group" value= "<%= tempExpirationDate %>" style ="width: 60%; height: 35px; margin-top:10px; margin-left: 23px;">
         </div>
 
         <div>
@@ -163,7 +144,7 @@
         <div>
             
             
-            <p style =" color:black; font-size: 30px;">Attached Files:</p>
+            <h1>Attached File:</h1>
             
             <div style="padding:10px;">
                 <% if(doc.file_ID.length > 0 ){ %>
